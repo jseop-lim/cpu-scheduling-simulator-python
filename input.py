@@ -5,7 +5,7 @@ from dataclasses import dataclass, field
 @dataclass
 class Model:
     p_num: int = field(init=False)
-    process_list: dict = field(init=False)
+    base_process_list: list = field(default_factory=list, init=False)
     time_slice: int = field(init=False)
 
     @classmethod
@@ -18,11 +18,11 @@ class Model:
         with open(path, 'r') as f:
             self.p_num = int(f.readline())
 
-            self.process_list = {}
+            self.base_process_list = []
             for _ in range(self.p_num):
                 row = f.readline().split()
                 row[1:] = map(int, row[1:])
-                self.process_list[row[0]] = Process(*row)
+                self.base_process_list.append(BaseProcess(*row))
 
             self.time_slice = int(f.readline())
 
@@ -40,30 +40,32 @@ class Handler:
         현재 실행 중인 프로세스의 remain burst_time이 0이 될 때까지
         time_slice 지났는지 수시로 검사
         """
-        for process in self.model.process_list.values():
-            process.init_fields()
+        process_list = list(map(Process, self.model.base_process_list))
+
 
     def main(self):
         print(self.model)
 
 
 @dataclass
-class Process:
+class BaseProcess:
     pid: str
     arrival: int
     burst: int
     priority: int
-    remain: int = None
-    complete: int = None
-    first_run: int = None
 
-    # def __init__(self, pid, arrival, burst, priority):
-    #     self.pid = pid
-    #     self.arrival = arrival
-    #     self.burst = burst
-    #     self.priority = priority
+    def __str__(self):
+        return self.pid
 
-    def init_fields(self):
+
+@dataclass
+class Process(BaseProcess):
+    remain: str
+    complete: int
+    first_run: int
+
+    def __init__(self, process: BaseProcess):
+        super().__init__(process.pid, process.arrival, process.burst, process.priority)
         self.remain = self.burst
         self.complete = None
         self.first_run = None
@@ -80,12 +82,9 @@ class Process:
     def wait(self):
         return None if self.turnaround is None else self.turnaround - self.burst
 
-    def __str__(self):
-        return self.pid
-
 
 if __name__ == '__main__':
-    handler = Handler('input.txt')
-    print(handler.model.process_list['P0'].remain)
+    handler = Handler(path='input.txt')
+
     handler.run_scheduler()
     handler.main()
