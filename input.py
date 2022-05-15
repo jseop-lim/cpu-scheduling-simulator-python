@@ -23,28 +23,10 @@ class Model:
                 row = f.readline().split()
                 row[1:] = map(int, row[1:])
                 self.base_process_list.append(BaseProcess(*row))
+            # arrival time의 오름차순으로 정렬
+            self.base_process_list.sort(key=lambda p: p.arrival)
 
             self.time_slice = int(f.readline())
-
-
-class Handler:
-    def __init__(self, path=None):
-        if path:
-            self.model = Model.create_from_file(path)
-        else:
-            raise ValueError('파일 경로를 입력하세요.')
-
-    def run_scheduler(self):
-        """
-        arrival_time list로 갖고 있으면서 수시로 검사
-        현재 실행 중인 프로세스의 remain burst_time이 0이 될 때까지
-        time_slice 지났는지 수시로 검사
-        """
-        process_list = list(map(Process, self.model.base_process_list))
-
-
-    def main(self):
-        print(self.model)
 
 
 @dataclass
@@ -81,6 +63,37 @@ class Process(BaseProcess):
     @property
     def wait(self):
         return None if self.turnaround is None else self.turnaround - self.burst
+
+
+class Handler:
+    def __init__(self, path=None):
+        if path:
+            self.model = Model.create_from_file(path)
+        else:
+            raise ValueError('파일 경로를 입력하세요.')
+
+    def run_scheduler(self):
+        """
+        arrival_time list로 갖고 있으면서 수시로 검사
+        현재 실행 중인 프로세스의 remain burst_time이 0이 될 때까지
+        time_slice 지났는지 수시로 검사
+        """
+        s = Scheduler(self.model.base_process_list)
+        # TODO 스케줄러 모듈이랑 이 함수랑 연결하기 - 입력? 필드?
+
+    def main(self):
+        print(self.model)
+
+
+class Scheduler:
+    def __init__(self, base_process_list):
+        self.planned_queue = list(map(Process, base_process_list))
+        self.ready_queue = []  # heap 제약이 적용될 수 있음
+        self.terminated_queue = []
+        self.running = None
+
+    def dispatch(self):
+        pass
 
 
 if __name__ == '__main__':
