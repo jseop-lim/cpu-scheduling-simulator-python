@@ -22,27 +22,26 @@ class Scheduler:
             raise IndexError('프로세스를 하나 이상 입력하세요.')
 
     def execute_times(self, time):
+        print(self.now, self.running)
         self.now += time
         self.running.remain -= time
         # save complete time
         if self.running.remain == 0:
             self.running.complete = self.now
         self.running.enqueued_at = self.now
-        print(self.now, self.running)  # TODO temp
 
     def dispatch(self):
         if self.running.remain > 0:
             self.ready_queue.enqueue(self.running)
         else:
             self.terminated_queue.append(self.running)
-        if self.ready_queue.not_empty():
-            self.running = self.ready_queue.dequeue()
+        self.running = self.ready_queue.dequeue() if self.ready_queue.not_empty() else None
 
-    def is_done(self):
-        return self.ready_queue.not_empty() or self.planned_queue
+    def check_over(self):
+        return self.running or self.ready_queue.not_empty() or self.planned_queue
 
     def run(self):
-        while self.is_done():
+        while self.check_over():
             # save first_run time
             if self.running.first_run is None:
                 self.running.first_run = self.now
@@ -58,14 +57,14 @@ class Scheduler:
                     self.ready_queue.enqueue(new_process)
                     # preempt by priority
                     if self.is_preemptive and new_process < self.running:
-                        self.execute_times(next_arrival_time)
+                        self.execute_times(next_dispatch_time)
                         self.dispatch()
                     continue
 
             self.execute_times(next_dispatch_time)
             self.dispatch()
 
-        print(self.now, self.running)
+        print(self.now, self.running)  # TODO temp
 
 
 class FCFS(Scheduler):

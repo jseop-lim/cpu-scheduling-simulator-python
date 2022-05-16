@@ -23,13 +23,16 @@ class Handler:
         turnaround_times = {process.pid: process.turnaround for process in scheduler.terminated_queue}
         waiting_times = {process.pid: process.wait for process in scheduler.terminated_queue}
 
+        print()
+        for ps in sorted(scheduler.terminated_queue, key=lambda p: p.pid):
+            print(ps)
+
         return response_times, turnaround_times, waiting_times
         # TODO 스케줄러 모듈이랑 이 함수랑 연결하기 - 입력? 필드?
 
     def main(self):
         print('FCFS')
-        output = self.run_scheduler(FCFS)
-        print('\n'.join(map(str, output)))
+        self.run_scheduler(FCFS)
         print('\nRR')
         self.run_scheduler(RR)
         print('\npriority')
