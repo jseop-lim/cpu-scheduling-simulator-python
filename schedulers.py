@@ -22,7 +22,6 @@ class Scheduler:
             raise IndexError('프로세스를 하나 이상 입력하세요.')
 
     def execute_times(self, time):
-        print(self.now, self.running)
         self.now += time
         self.running.remain -= time
         # save complete time
@@ -30,7 +29,11 @@ class Scheduler:
             self.running.complete = self.now
         self.running.enqueued_at = self.now
 
-    def dispatch(self):
+    def dispatch(self, time):
+        print(self.now, self.running)
+        self.running.set_log(self.now, time)  # gantt chart
+        self.execute_times(time)
+
         if self.running.remain > 0:
             self.ready_queue.enqueue(self.running)
         else:
@@ -57,12 +60,10 @@ class Scheduler:
                     self.ready_queue.enqueue(new_process)
                     # preempt by priority
                     if self.is_preemptive and new_process < self.running:
-                        self.execute_times(next_dispatch_time)
-                        self.dispatch()
+                        self.dispatch(next_dispatch_time)
                     continue
 
-            self.execute_times(next_dispatch_time)
-            self.dispatch()
+            self.dispatch(next_dispatch_time)
 
         print(self.now, self.running)  # TODO temp
 

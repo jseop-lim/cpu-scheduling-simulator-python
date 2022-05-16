@@ -3,6 +3,8 @@ from schedulers import FCFS, RR, Priority, PriorityPreemptive, PriorityPreemptiv
 
 
 class Handler:
+    scheduler_list = [FCFS, RR, Priority, PriorityPreemptive, PriorityPreemptiveRR]
+
     def __init__(self, path=None):
         if path:
             self.model = Model.create_from_file(path)
@@ -22,29 +24,22 @@ class Handler:
         response_times = {process.pid: process.response for process in scheduler.terminated_queue}
         turnaround_times = {process.pid: process.turnaround for process in scheduler.terminated_queue}
         waiting_times = {process.pid: process.wait for process in scheduler.terminated_queue}
+        gantt_data = {process.pid: process.log for process in scheduler.terminated_queue}
 
         print()
         for ps in sorted(scheduler.terminated_queue, key=lambda p: p.pid):
             print(ps)
 
-        return response_times, turnaround_times, waiting_times
+        return response_times, turnaround_times, waiting_times, gantt_data
         # TODO 스케줄러 모듈이랑 이 함수랑 연결하기 - 입력? 필드?
 
     def main(self):
-        print('FCFS')
-        self.run_scheduler(FCFS)
-        print('\nRR')
-        self.run_scheduler(RR)
-        print('\npriority')
-        self.run_scheduler(Priority)
-        print('\npriority preemptive')
-        self.run_scheduler(PriorityPreemptive)
-        print('\npriority preemptive + RR')
-        self.run_scheduler(PriorityPreemptiveRR)
+        for Scheduler in self.scheduler_list:
+            print(Scheduler.__name__)
+            output = self.run_scheduler(Scheduler)
+            print(output[3], '\n')
 
 
 if __name__ == '__main__':
     handler = Handler(path='input.txt')
-
-    # handler.run_scheduler()
     handler.main()

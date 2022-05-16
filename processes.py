@@ -1,4 +1,4 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 
 
 @dataclass
@@ -18,6 +18,7 @@ class Process(BaseProcess):
     complete: int
     first_run: int
     enqueued_at: int
+    log: dict = field(repr=False)
 
     def __init__(self, process: BaseProcess):
         super().__init__(process.pid, process.arrival, process.burst, process.priority)
@@ -25,6 +26,7 @@ class Process(BaseProcess):
         self.complete = None
         self.first_run = None
         self.enqueued_at = self.arrival
+        self.log = []
 
     def __lt__(self, other):
         return (self.priority, self.enqueued_at) < (other.priority, other.enqueued_at)
@@ -40,3 +42,7 @@ class Process(BaseProcess):
     @property
     def wait(self):
         return None if self.turnaround is None else self.turnaround - self.burst
+
+    def set_log(self, start, time):
+        self.log.append([start, start+time, time])  # TODO gantt input에 따라 수정
+
