@@ -18,7 +18,7 @@ class Process(BaseProcess):
     complete: int
     first_run: int
     enqueued_at: int
-    log: dict = field(repr=False)
+    log: list = field(repr=False)
 
     def __init__(self, process: BaseProcess):
         super().__init__(process.pid, process.arrival, process.burst, process.priority)
@@ -44,5 +44,9 @@ class Process(BaseProcess):
         return None if self.turnaround is None else self.turnaround - self.burst
 
     def set_log(self, start, time):
-        self.log.append([start, start+time, time])  # TODO gantt input에 따라 수정
+        self.log.append([start, start+time])  # TODO gantt input에 따라 수정
 
+
+class ShortestFirstProcess(Process):
+    def __lt__(self, other):
+        return (self.remain, self.enqueued_at) < (other.remain, other.enqueued_at)

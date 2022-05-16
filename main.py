@@ -1,9 +1,17 @@
 from input import Model
-from schedulers import FCFS, RR, Priority, PriorityPreemptive, PriorityPreemptiveRR
+from schedulers import (
+    FirstComeFirstServed, RoundRobin,
+    Priority, PriorityPreemptive, PriorityPreemptiveRR,
+    ShortestJobFirst#, ShortestRemainingTimeFirst
+)
 
 
 class Handler:
-    scheduler_list = [FCFS, RR, Priority, PriorityPreemptive, PriorityPreemptiveRR]
+    scheduler_list = (
+        FirstComeFirstServed, RoundRobin,
+        Priority, PriorityPreemptive, PriorityPreemptiveRR,
+        ShortestJobFirst#, ShortestRemainingTimeFirst
+    )
 
     def __init__(self, path=None):
         if path:

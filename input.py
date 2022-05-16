@@ -3,6 +3,7 @@ from processes import BaseProcess
 
 # TODO 전략 패턴 사용
 
+
 @dataclass
 class Model:
     p_num: int = field(init=False)
