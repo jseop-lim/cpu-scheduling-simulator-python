@@ -22,15 +22,13 @@ class Scheduler:
             raise IndexError('프로세스를 하나 이상 입력하세요.')
 
     def execute_times(self, time):
-        print(self.now, self.running, end=' - ')
         self.now += time
         self.running.remain -= time
-        self.running.arrival = self.now  # heap 우선순위에서 사용
+        # save complete time
         if self.running.remain == 0:
             self.running.complete = self.now
-            print('(종료)')
-        else:
-            print('(interrupt)')
+        self.running.enqueued_at = self.now
+        print(self.now, self.running)  # TODO temp
 
     def dispatch(self):
         if self.running.remain > 0:
@@ -43,21 +41,13 @@ class Scheduler:
     def is_done(self):
         return self.ready_queue.not_empty() or self.planned_queue
 
-    def preempt(self, next_dispatch_time):
-        if self.planned_queue:
-            next_arrival_time = self.planned_queue[0].arrival - self.now
-            if next_arrival_time <= next_dispatch_time:
-                new_process = self.planned_queue.pop(0)
-                self.ready_queue.enqueue(new_process)
-                if self.is_priority and new_process.priority < self.running.priority:
-                    self.execute_times(next_arrival_time)
-                    self.dispatch()
-
     def run(self):
         while self.is_done():
+            # save first_run time
             if self.running.first_run is None:
                 self.running.first_run = self.now
 
+            # TODO time slice 지나면 self.now는 증가하지만 실행 프로세스는 그대로
             next_dispatch_time = min(self.running.remain, self.time_slice)
 
             if self.planned_queue:
@@ -67,7 +57,7 @@ class Scheduler:
                     new_process = self.planned_queue.pop(0)
                     self.ready_queue.enqueue(new_process)
                     # preempt by priority
-                    if self.is_preemptive and new_process.priority < self.running.priority:
+                    if self.is_preemptive and new_process < self.running:
                         self.execute_times(next_arrival_time)
                         self.dispatch()
                     continue

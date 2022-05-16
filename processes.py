@@ -8,8 +8,8 @@ class BaseProcess:
     burst: int
     priority: int
 
-    def __str__(self):
-        return self.pid
+    # def __str__(self):
+    #     return self.pid
 
 
 @dataclass
@@ -17,17 +17,17 @@ class Process(BaseProcess):
     remain: str
     complete: int
     first_run: int
+    enqueued_at: int
 
     def __init__(self, process: BaseProcess):
         super().__init__(process.pid, process.arrival, process.burst, process.priority)
         self.remain = self.burst
         self.complete = None
         self.first_run = None
+        self.enqueued_at = self.arrival
 
     def __lt__(self, other):
-        if self.priority == other.priority:
-            return self.arrival < other.arrival
-        return self.priority < other.priority
+        return (self.priority, self.enqueued_at) < (other.priority, other.enqueued_at)
 
     @property
     def response(self):
