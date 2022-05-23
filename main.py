@@ -51,8 +51,8 @@ class Handler:
             print('response time : ',self.outputs[i][0],'\n')
             print('turnaround time: ', self.outputs[i][1], '\n')
             print('waiting ime : ' , self.outputs[i][2], '\n')
-            self.gantt[i] = Gantt(self.outputs[i][3])
-            self.gantt[i].create_image(Scheduler.__name__)
+            #self.gantt[i] = Gantt(self.outputs[i][3])
+            #self.gantt[i].create_image(Scheduler.__name__)
 if __name__ == '__main__':
     handler = Handler(path='input.txt')
     handler.main()
