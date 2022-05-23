@@ -1,0 +1,940 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1110</width>
+    <height>757</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="widget">
+   <widget class="QTabWidget" name="lefthalf">
+    <property name="geometry">
+     <rect>
+      <x>130</x>
+      <y>120</y>
+      <width>461</width>
+      <height>401</height>
+     </rect>
+    </property>
+    <property name="currentIndex">
+     <number>1</number>
+    </property>
+    <property name="tabBarAutoHide">
+     <bool>false</bool>
+    </property>
+    <widget class="QWidget" name="tab_fcfs">
+     <attribute name="title">
+      <string>FCFS</string>
+     </attribute>
+     <widget class="QTableWidget" name="results_fcfs">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>110</y>
+        <width>420</width>
+        <height>161</height>
+       </rect>
+      </property>
+      <row>
+       <property name="text">
+        <string>1</string>
+       </property>
+      </row>
+      <row>
+       <property name="text">
+        <string>2</string>
+       </property>
+      </row>
+      <row>
+       <property name="text">
+        <string>3</string>
+       </property>
+      </row>
+      <column>
+       <property name="text">
+        <string>pid</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>response time</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>turnaround time</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>waiting time</string>
+       </property>
+      </column>
+     </widget>
+     <widget class="QTableWidget" name="avg_fcfs">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>300</y>
+        <width>420</width>
+        <height>61</height>
+       </rect>
+      </property>
+      <row>
+       <property name="text">
+        <string>average value</string>
+       </property>
+      </row>
+      <column>
+       <property name="text">
+        <string>waiting time</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>turnaround time</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>waitting time</string>
+       </property>
+      </column>
+     </widget>
+     <widget class="QGraphicsView" name="gantt_fcfs">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>20</y>
+        <width>420</width>
+        <height>71</height>
+       </rect>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tab_priority">
+     <attribute name="title">
+      <string>Priority</string>
+     </attribute>
+     <widget class="QTableWidget" name="results_priority">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>110</y>
+        <width>420</width>
+        <height>161</height>
+       </rect>
+      </property>
+      <row>
+       <property name="text">
+        <string>1</string>
+       </property>
+      </row>
+      <row>
+       <property name="text">
+        <string>2</string>
+       </property>
+      </row>
+      <row>
+       <property name="text">
+        <string>3</string>
+       </property>
+      </row>
+      <column>
+       <property name="text">
+        <string>pid</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>waiting time</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>turnaround time</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>waiting time</string>
+       </property>
+      </column>
+     </widget>
+     <widget class="QTableWidget" name="avg_priority">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>300</y>
+        <width>420</width>
+        <height>61</height>
+       </rect>
+      </property>
+      <row>
+       <property name="text">
+        <string>average value</string>
+       </property>
+      </row>
+      <column>
+       <property name="text">
+        <string>waiting time</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>turnaround time</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>waitting time</string>
+       </property>
+      </column>
+     </widget>
+     <widget class="QGraphicsView" name="gantt_priority">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>20</y>
+        <width>420</width>
+        <height>71</height>
+       </rect>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tab_pp">
+     <attribute name="title">
+      <string>PP</string>
+     </attribute>
+     <widget class="QTableWidget" name="results_pp">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>110</y>
+        <width>420</width>
+        <height>161</height>
+       </rect>
+      </property>
+      <row>
+       <property name="text">
+        <string>1</string>
+       </property>
+      </row>
+      <row>
+       <property name="text">
+        <string>2</string>
+       </property>
+      </row>
+      <row>
+       <property name="text">
+        <string>3</string>
+       </property>
+      </row>
+      <column>
+       <property name="text">
+        <string>pid</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>waiting time</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>turnaround time</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>waiting time</string>
+       </property>
+      </column>
+     </widget>
+     <widget class="QTableWidget" name="avg_pp">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>300</y>
+        <width>420</width>
+        <height>61</height>
+       </rect>
+      </property>
+      <row>
+       <property name="text">
+        <string>average value</string>
+       </property>
+      </row>
+      <column>
+       <property name="text">
+        <string>waiting time</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>turnaround time</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>waitting time</string>
+       </property>
+      </column>
+     </widget>
+     <widget class="QGraphicsView" name="gantt_pp">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>20</y>
+        <width>420</width>
+        <height>71</height>
+       </rect>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tab_rr">
+     <attribute name="title">
+      <string>RR</string>
+     </attribute>
+     <widget class="QTableWidget" name="results_rr">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>110</y>
+        <width>420</width>
+        <height>161</height>
+       </rect>
+      </property>
+      <row>
+       <property name="text">
+        <string>1</string>
+       </property>
+      </row>
+      <row>
+       <property name="text">
+        <string>2</string>
+       </property>
+      </row>
+      <row>
+       <property name="text">
+        <string>3</string>
+       </property>
+      </row>
+      <column>
+       <property name="text">
+        <string>pid</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>waiting time</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>turnaround time</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>waiting time</string>
+       </property>
+      </column>
+     </widget>
+     <widget class="QTableWidget" name="avg_rr">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>300</y>
+        <width>420</width>
+        <height>61</height>
+       </rect>
+      </property>
+      <row>
+       <property name="text">
+        <string>average value</string>
+       </property>
+      </row>
+      <column>
+       <property name="text">
+        <string>waiting time</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>turnaround time</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>waitting time</string>
+       </property>
+      </column>
+     </widget>
+     <widget class="QGraphicsView" name="gantt_rr">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>20</y>
+        <width>420</width>
+        <height>71</height>
+       </rect>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tab_pprr">
+     <attribute name="title">
+      <string>PPRR</string>
+     </attribute>
+     <widget class="QTableWidget" name="results_pprr">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>110</y>
+        <width>420</width>
+        <height>161</height>
+       </rect>
+      </property>
+      <row>
+       <property name="text">
+        <string>1</string>
+       </property>
+      </row>
+      <row>
+       <property name="text">
+        <string>2</string>
+       </property>
+      </row>
+      <row>
+       <property name="text">
+        <string>3</string>
+       </property>
+      </row>
+      <column>
+       <property name="text">
+        <string>pid</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>waiting time</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>turnaround time</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>waiting time</string>
+       </property>
+      </column>
+     </widget>
+     <widget class="QTableWidget" name="avg_pprr">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>300</y>
+        <width>420</width>
+        <height>61</height>
+       </rect>
+      </property>
+      <row>
+       <property name="text">
+        <string>average value</string>
+       </property>
+      </row>
+      <column>
+       <property name="text">
+        <string>waiting time</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>turnaround time</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>waitting time</string>
+       </property>
+      </column>
+     </widget>
+     <widget class="QGraphicsView" name="gantt_pprr">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>20</y>
+        <width>420</width>
+        <height>71</height>
+       </rect>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tab_sjf">
+     <attribute name="title">
+      <string>SJF</string>
+     </attribute>
+     <widget class="QTableWidget" name="results_sjf">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>110</y>
+        <width>420</width>
+        <height>161</height>
+       </rect>
+      </property>
+      <row>
+       <property name="text">
+        <string>1</string>
+       </property>
+      </row>
+      <row>
+       <property name="text">
+        <string>2</string>
+       </property>
+      </row>
+      <row>
+       <property name="text">
+        <string>3</string>
+       </property>
+      </row>
+      <column>
+       <property name="text">
+        <string>pid</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>waiting time</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>turnaround time</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>waiting time</string>
+       </property>
+      </column>
+     </widget>
+     <widget class="QTableWidget" name="avg_sjf">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>300</y>
+        <width>420</width>
+        <height>61</height>
+       </rect>
+      </property>
+      <row>
+       <property name="text">
+        <string>average value</string>
+       </property>
+      </row>
+      <column>
+       <property name="text">
+        <string>waiting time</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>turnaround time</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>waitting time</string>
+       </property>
+      </column>
+     </widget>
+     <widget class="QGraphicsView" name="gantt_sjf">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>20</y>
+        <width>420</width>
+        <height>71</height>
+       </rect>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tab_srtf">
+     <attribute name="title">
+      <string>SRTF</string>
+     </attribute>
+     <widget class="QTableWidget" name="results_srtf">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>110</y>
+        <width>420</width>
+        <height>161</height>
+       </rect>
+      </property>
+      <row>
+       <property name="text">
+        <string>1</string>
+       </property>
+      </row>
+      <row>
+       <property name="text">
+        <string>2</string>
+       </property>
+      </row>
+      <row>
+       <property name="text">
+        <string>3</string>
+       </property>
+      </row>
+      <column>
+       <property name="text">
+        <string>pid</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>waiting time</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>turnaround time</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>waiting time</string>
+       </property>
+      </column>
+     </widget>
+     <widget class="QTableWidget" name="avg_srtf">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>300</y>
+        <width>420</width>
+        <height>61</height>
+       </rect>
+      </property>
+      <row>
+       <property name="text">
+        <string>average value</string>
+       </property>
+      </row>
+      <column>
+       <property name="text">
+        <string>response time</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>turnaround time</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>waitting time</string>
+       </property>
+      </column>
+     </widget>
+     <widget class="QGraphicsView" name="gantt_srtf">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>20</y>
+        <width>420</width>
+        <height>71</height>
+       </rect>
+      </property>
+     </widget>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="layoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>610</x>
+      <y>119</y>
+      <width>411</width>
+      <height>391</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="righthalf">
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout">
+       <item>
+        <widget class="QLabel" name="label_timeslice">
+         <property name="text">
+          <string>Timeslice: </string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="lineEdit_timeslice">
+         <property name="text">
+          <string>Timeslice</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="horizontalSpacer">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pushButton_run">
+         <property name="text">
+          <string>Run</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="horizontalSpacer_2">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pushButton_deleteall">
+         <property name="text">
+          <string>Delete All</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <widget class="QTableWidget" name="tableWidget_processes">
+       <row>
+        <property name="text">
+         <string>1</string>
+        </property>
+       </row>
+       <row>
+        <property name="text">
+         <string>2</string>
+        </property>
+       </row>
+       <row>
+        <property name="text">
+         <string>3</string>
+        </property>
+       </row>
+       <row>
+        <property name="text">
+         <string>4</string>
+        </property>
+       </row>
+       <column>
+        <property name="text">
+         <string>pid</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>arrival time</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>burst time</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>priority</string>
+        </property>
+       </column>
+       <item row="0" column="0">
+        <property name="text">
+         <string>4</string>
+        </property>
+       </item>
+       <item row="0" column="1">
+        <property name="text">
+         <string>2</string>
+        </property>
+       </item>
+       <item row="0" column="2">
+        <property name="text">
+         <string>4</string>
+        </property>
+       </item>
+       <item row="0" column="3">
+        <property name="text">
+         <string>2</string>
+        </property>
+       </item>
+       <item row="1" column="0">
+        <property name="text">
+         <string>3</string>
+        </property>
+       </item>
+       <item row="1" column="1">
+        <property name="text">
+         <string>7</string>
+        </property>
+       </item>
+       <item row="1" column="2">
+        <property name="text">
+         <string>2</string>
+        </property>
+       </item>
+       <item row="1" column="3">
+        <property name="text">
+         <string>4</string>
+        </property>
+       </item>
+       <item row="2" column="0">
+        <property name="text">
+         <string>6</string>
+        </property>
+       </item>
+       <item row="2" column="1">
+        <property name="text">
+         <string>5</string>
+        </property>
+       </item>
+       <item row="2" column="2">
+        <property name="text">
+         <string>5</string>
+        </property>
+       </item>
+       <item row="2" column="3">
+        <property name="text">
+         <string>7</string>
+        </property>
+       </item>
+       <item row="3" column="0">
+        <property name="text">
+         <string>7</string>
+        </property>
+       </item>
+       <item row="3" column="1">
+        <property name="text">
+         <string>7</string>
+        </property>
+       </item>
+       <item row="3" column="2">
+        <property name="text">
+         <string>3</string>
+        </property>
+       </item>
+       <item row="3" column="3">
+        <property name="text">
+         <string>1</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout_2">
+       <item>
+        <layout class="QVBoxLayout" name="verticalLayout">
+         <item>
+          <layout class="QHBoxLayout" name="layout_label">
+           <item>
+            <widget class="QLabel" name="label_pid">
+             <property name="text">
+              <string>pid</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="label_arrival">
+             <property name="text">
+              <string>arrival</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="label_burst">
+             <property name="text">
+              <string>burst</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="label_priority">
+             <property name="text">
+              <string>priority</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="layout_lineEdit">
+           <item>
+            <widget class="QLineEdit" name="lineEdit_pid">
+             <property name="text">
+              <string>pid</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLineEdit" name="lineEdit_arrival">
+             <property name="text">
+              <string>arrival</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLineEdit" name="lineEdit_burst">
+             <property name="text">
+              <string>burst</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLineEdit" name="lineEdit_priority">
+             <property name="text">
+              <string>priority</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pushButton_add">
+         <property name="text">
+          <string>add</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
