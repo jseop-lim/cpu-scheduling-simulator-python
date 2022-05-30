@@ -12,6 +12,9 @@ class Handler:
         Priority, PriorityPreemptive, PriorityPreemptiveRR,
         ShortestJobFirst#, ShortestRemainingTimeFirst
     )
+    schedulers = [
+        'FCFS', 'RR', 'Priority', 'PP', 'PPRR', 'SJF', 'SRTF'
+    ]
     def __init__(self):
         self.outputs = []
         self.gantts = []
@@ -47,12 +50,15 @@ class Handler:
         for i, Scheduler in enumerate(self.scheduler_list):
             print(Scheduler.__name__, i)
             self.outputs.append(self.run_scheduler(Scheduler))
-            #print('result:  ', self.outputs[i][3], '\n')
             print('response time : ',self.outputs[i][0],'\n')
             print('turnaround time: ', self.outputs[i][1], '\n')
-            print('waiting ime : ' , self.outputs[i][2], '\n')
-            #self.gantt[i] = Gantt(self.outputs[i][3])
-            #self.gantt[i].create_image(Scheduler.__name__)
+            print('waiting time : ' , self.outputs[i][2], '\n')
+            
+            self.gantt = Gantt()
+            self.gantt.create_gantt(self.outputs[i][3], self.schedulers[i])
+            #self.gantt.create_image(self.schedulers[i])
+       
+
 if __name__ == '__main__':
     handler = Handler(path='input.txt')
     handler.main()

@@ -94,7 +94,7 @@
       </row>
       <column>
        <property name="text">
-        <string>waiting time</string>
+        <string>response time</string>
        </property>
       </column>
       <column>
@@ -104,7 +104,7 @@
       </column>
       <column>
        <property name="text">
-        <string>waitting time</string>
+        <string>waiting time</string>
        </property>
       </column>
      </widget>
@@ -154,7 +154,7 @@
       </column>
       <column>
        <property name="text">
-        <string>waiting time</string>
+        <string>response time</string>
        </property>
       </column>
       <column>
@@ -184,7 +184,7 @@
       </row>
       <column>
        <property name="text">
-        <string>waiting time</string>
+        <string>response time</string>
        </property>
       </column>
       <column>
@@ -194,7 +194,7 @@
       </column>
       <column>
        <property name="text">
-        <string>waitting time</string>
+        <string>waiting time</string>
        </property>
       </column>
      </widget>
@@ -244,7 +244,7 @@
       </column>
       <column>
        <property name="text">
-        <string>waiting time</string>
+        <string>response time</string>
        </property>
       </column>
       <column>
@@ -274,7 +274,7 @@
       </row>
       <column>
        <property name="text">
-        <string>waiting time</string>
+        <string>response time</string>
        </property>
       </column>
       <column>
@@ -284,7 +284,7 @@
       </column>
       <column>
        <property name="text">
-        <string>waitting time</string>
+        <string>waiting time</string>
        </property>
       </column>
      </widget>
@@ -334,7 +334,7 @@
       </column>
       <column>
        <property name="text">
-        <string>waiting time</string>
+        <string>response time</string>
        </property>
       </column>
       <column>
@@ -364,7 +364,7 @@
       </row>
       <column>
        <property name="text">
-        <string>waiting time</string>
+        <string>response time</string>
        </property>
       </column>
       <column>
@@ -374,7 +374,7 @@
       </column>
       <column>
        <property name="text">
-        <string>waitting time</string>
+        <string>waiting time</string>
        </property>
       </column>
      </widget>
@@ -424,7 +424,7 @@
       </column>
       <column>
        <property name="text">
-        <string>waiting time</string>
+        <string>response time</string>
        </property>
       </column>
       <column>
@@ -454,7 +454,7 @@
       </row>
       <column>
        <property name="text">
-        <string>waiting time</string>
+        <string>response time</string>
        </property>
       </column>
       <column>
@@ -464,7 +464,7 @@
       </column>
       <column>
        <property name="text">
-        <string>waitting time</string>
+        <string>waiting time</string>
        </property>
       </column>
      </widget>
@@ -514,7 +514,7 @@
       </column>
       <column>
        <property name="text">
-        <string>waiting time</string>
+        <string>response time</string>
        </property>
       </column>
       <column>
@@ -544,7 +544,7 @@
       </row>
       <column>
        <property name="text">
-        <string>waiting time</string>
+        <string>response time</string>
        </property>
       </column>
       <column>
@@ -554,7 +554,7 @@
       </column>
       <column>
        <property name="text">
-        <string>waitting time</string>
+        <string>waiting time</string>
        </property>
       </column>
      </widget>
@@ -604,7 +604,7 @@
       </column>
       <column>
        <property name="text">
-        <string>waiting time</string>
+        <string>response time</string>
        </property>
       </column>
       <column>
@@ -644,7 +644,7 @@
       </column>
       <column>
        <property name="text">
-        <string>waitting time</string>
+        <string>waiting time</string>
        </property>
       </column>
      </widget>

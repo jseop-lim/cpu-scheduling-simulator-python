@@ -3,6 +3,7 @@ from PyQt5.QtWidgets import *
 from PyQt5 import uic
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import *
+from PyQt5.QtWebEngine import *
 import os
 from PyQt5.QtCore import pyqtSlot
 from processes import BaseProcess
@@ -10,10 +11,14 @@ from input import Model
 from main import Handler
 from processes import BaseProcess
 from gantt import Gantt
+from PyQt5.QtWebEngineWidgets import *
+import plotly.io as pio
+from html2image import Html2Image
 
 ui_path = os.path.dirname(os.path.abspath(__file__))
 form_class= uic.loadUiType(os.path.join(ui_path, "mainwindow.ui"))[0]
 
+hti = Html2Image()
 
 class myApp(QMainWindow, form_class):
     def __init__(self):
@@ -40,7 +45,42 @@ class myApp(QMainWindow, form_class):
         for btn in btn_list:
             btn.clicked.connect(lambda x, button = btn: self.button_func(x, button))
     
-    
+
+    @pyqtSlot()
+    def graphics(self, tab):
+        scene = QGraphicsScene()
+        pname = 'image_'+tab+'.png'
+        pixmap = QPixmap('image_'+tab+'.png')
+        pixmap = pixmap.scaledToWidth(400)
+        #web = QWebEngineView()
+        #web.load(Qt.QUrl('image/image_FCFS.html')
+        #web.load('image_FCFS.html')
+        #item = QGraphicsTextItem()
+        #item.setOpenExternalLinks(True)
+        #item.setHtml('./image/image_FCFS.html')
+        
+        if tab == 'FCFS':
+            view =self.ui.gantt_fcfs
+        elif tab == 'Priority' :
+            view = self.ui.gantt_priority
+        elif tab == 'RR' :
+            view = self.ui.gantt_rr
+        elif tab == 'PP' :
+            view = self.ui.gantt_pp
+        elif tab =='PPRR' :
+            view = self.ui.gantt_pprr
+        elif tab == 'SJF':
+            view = self.ui.gantt_sjf
+        elif tab == 'SRTF' :
+            view = self.ui.gantt_srtf
+        scene.addPixmap(pixmap)
+        
+        #scene.addItem(item)
+       
+        
+        view.setScene(scene)
+        view.show()
+
     
     @pyqtSlot()
 
@@ -58,18 +98,7 @@ class myApp(QMainWindow, form_class):
                 self.ui.results_fcfs.setItem(i,1,QTableWidgetItem(str(response[id])))
                 self.ui.results_fcfs.setItem(i,2,QTableWidgetItem(str(turnaround[id])))
                 self.ui.results_fcfs.setItem(i,3,QTableWidgetItem(str(waiting[id])))
-        
-            item = QGraphicsRectItem()
-            item.setRect(10,10,50,50)
-            item.setBrush(Qt.yellow)
-            item.setPen(QPen(Qt.red, 5))
-
-            scene = QGraphicsScene()
-            scene.addItem(item)
-
-            view = QGraphicsView()
-            view.setScene(scene)
-            view.show()
+    
 
         elif tab == 'RR':
             response = self.handler.outputs[1][0] # RR's waiting time
@@ -155,6 +184,14 @@ class myApp(QMainWindow, form_class):
                 self.ui.results_srtf.setItem(i,2,QTableWidgetItem(str(turnaround[id])))
                 self.ui.results_srtf.setItem(i,3,QTableWidgetItem(str(waiting[id])))
 
+        #self.graphics(tab)
+
+    #@pyqtSlot()
+    #def creating_charts(self):
+    #    for i in range(7):
+     #       self.handler.gantts[i].create_gantt(self.handler.outputs[i][3])
+            #self.handler.gantts[i].create_image(self.handler.schedulers[i])
+    
     @pyqtSlot()
     def button_func(self, x, button):
         # 없는거 확인 validation
@@ -168,7 +205,7 @@ class myApp(QMainWindow, form_class):
             ##validation!! 비어있는 것이 있는가?
             if (not input1 or not input2 or not input3 or not input4):
                 QMessageBox.warning(self, 'ERROR', 'You missed something!\nPlease Enter ALL')
-            
+                return
             # validation!! 옳은 형식인가? (priority : int, pid : string, arrival : float, burst : float)
 
             # validation Pid 같은거 확인. 
@@ -196,23 +233,23 @@ class myApp(QMainWindow, form_class):
         elif(exp =='Delete All'):
             self.ui.tableWidget_processes.clear()
             self.ui.tableWidget_processes.setRowCount(0)
+            self.ui.gantt_fcfs.items().clear()
+            self.ui.gantt_priority.items().clear()
 
         elif(exp =='Run'):
             if(len(self.model.base_process_list)<=0) :
                 QMessageBox.warning(self, "ERROR","No entry! Please ENTER the inputs")
-            
+                return
+
             timeslice = self.ui.lineEdit_timeslice.text()
             if not timeslice:
                 # timeslice 숫자? 확인하기!!
                 QMessageBox.warning(self, "ERROR", "You missed timeslice!\nPlease enter TIMESLICE")
+                return
+
             else:
                 self.model.sort_inputs(timeslice)
                 self.handler.main()
-                #self.print_outputs()
-                #print('test:', self.handler.output[3])
-                #for i in range(7):
-                    #self.handler.outputs[i][2].sort(key=lambda p: p.pid)
-                    #print(self.handler.outputs[i][2])
                 self.fill_in_results('FCFS')
                 self.fill_in_results('RR')
                 self.fill_in_results('Priority')
@@ -220,7 +257,17 @@ class myApp(QMainWindow, form_class):
                 self.fill_in_results('PPRR')
                 self.fill_in_results('SJF')
                 #self.fill_in_results('SRTF')
-                #img = self.gantt[0].create_gantt()
+                
+                #self.creating_charts()
+                self.graphics('FCFS')
+                self.graphics('RR')
+                self.graphics('Priority')
+                self.graphics('PP')
+                self.graphics('PPRR')
+                self.graphics('SJF')
+                #self.graphics('FCFS')
+               
+                
                 
 
 if __name__ == '__main__':
@@ -228,3 +275,4 @@ if __name__ == '__main__':
     ex = myApp()
     ex.show()
     sys.exit(app.exec_())
+
