@@ -41,6 +41,9 @@ class Gantt:
         self.fig['layout']['annotations'] = annots
         
         #self.fig.show()
+        if not os.path.exists(os.path.join(path, 'html')):
+            os.makedirs(os.path.join(path, 'html'))
+
         filepath = os.path.join(path, 'html/image_' +ver+'.html')
         pio.write_html(self.fig, filepath)
         filename = os.path.join(path,'image/'+ver+'.png')
@@ -65,8 +68,6 @@ class Gantt:
                 hti.screenshot(f.read(), save_as = 'image_SJF.png')
                 f.close() 
 
-    def figure(self):
-        return self.fig
     
     def create_image(self, ver):
         #filename = os.path.join(path,'html/image_'+ver+'.html')

@@ -35,6 +35,16 @@ class myApp(QMainWindow, form_class):
                          self.ui.lineEdit_priority,
                          self.ui.lineEdit_timeslice]
         
+        #validation
+        #1) arrival, burst, timeslice : double로 제한
+        #2) priority : int로 제한
+        intValidator = QIntValidator(0,100)
+        floatValidator = QDoubleValidator(0.0, 100.0, 2)
+
+        lineEdit_list[0].setValidator(floatValidator)
+        lineEdit_list[1].setValidator(floatValidator)
+        lineEdit_list[3].setValidator(intValidator)
+        lineEdit_list[4].setValidator(floatValidator)
         #self.ui.lineEdit_priority.setInputMask("00") #99개까지만?
         #for lineEdit in lineEdit_list:
         #    lineEdit.setValidator() # #pid는 string, arrival, burst 등은 숫자로 제한. 
@@ -49,15 +59,9 @@ class myApp(QMainWindow, form_class):
     @pyqtSlot()
     def graphics(self, tab):
         scene = QGraphicsScene()
-        pname = 'image_'+tab+'.png'
+        #pname = 'image_'+tab+'.png'
         pixmap = QPixmap('image_'+tab+'.png')
         pixmap = pixmap.scaledToWidth(400)
-        #web = QWebEngineView()
-        #web.load(Qt.QUrl('image/image_FCFS.html')
-        #web.load('image_FCFS.html')
-        #item = QGraphicsTextItem()
-        #item.setOpenExternalLinks(True)
-        #item.setHtml('./image/image_FCFS.html')
         
         if tab == 'FCFS':
             view =self.ui.gantt_fcfs
@@ -74,14 +78,53 @@ class myApp(QMainWindow, form_class):
         elif tab == 'SRTF' :
             view = self.ui.gantt_srtf
         scene.addPixmap(pixmap)
-        
-        #scene.addItem(item)
-       
-        
         view.setScene(scene)
         view.show()
 
-    
+    @pyqtSlot()
+    def fill_avg(self, tab):
+        if tab == 'FCFS':
+            avg = self.handler.outputs[0][4] # FCFS' avg times
+            times = avg.keys()
+            for i, time in enumerate(times):
+                self.ui.avg_fcfs.setItem(0,i, QTableWidgetItem(str(avg[time])))
+        
+        elif tab =='RR':
+            avg= self.handler.outputs[1][4] # RR's avg times
+            times =avg.keys()
+            for i, time in enumerate(times):
+                self.ui.avg_rr.setItem(0, i, QTableWidgetItem(str(avg[time])))
+
+        elif tab == 'Priority':
+            avg= self.handler.outputs[2][4] #Priority's avg times
+            times =avg.keys()
+            for i, time in enumerate(times):
+                self.ui.avg_priority.setItem(0, i, QTableWidgetItem(str(avg[time])))
+
+        elif tab == 'PP':
+            avg= self.handler.outputs[3][4] #PP's avg times
+            times =avg.keys()
+            for i, time in enumerate(times):
+                self.ui.avg_pp.setItem(0, i, QTableWidgetItem(str(avg[time])))
+
+        elif tab == 'PPRR':
+            avg= self.handler.outputs[4][4] #PPRR's avg times
+            times =avg.keys()
+            for i, time in enumerate(times):
+                self.ui.avg_pprr.setItem(0, i, QTableWidgetItem(str(avg[time])))
+        
+        elif tab == 'SJF':
+            avg= self.handler.outputs[5][4] #SJF's avg times
+            times =avg.keys()
+            for i, time in enumerate(times):
+                self.ui.avg_sjf.setItem(0, i, QTableWidgetItem(str(avg[time])))
+        
+        elif tab == 'SRTF':
+            avg= self.handler.outputs[6][4] #SRTF's avg times
+            times =avg.keys()
+            for i, time in enumerate(times):
+                self.ui.avg_srtf.setItem(0, i, QTableWidgetItem(str(avg[time])))
+
     @pyqtSlot()
 
     def fill_in_results(self, tab):
@@ -184,14 +227,16 @@ class myApp(QMainWindow, form_class):
                 self.ui.results_srtf.setItem(i,2,QTableWidgetItem(str(turnaround[id])))
                 self.ui.results_srtf.setItem(i,3,QTableWidgetItem(str(waiting[id])))
 
-        #self.graphics(tab)
+    @pyqtSlot()
+    def find_dup(self, pid, row):
+        table = self.ui.tableWidget_processes
+        for i in range(row):
+            item = QTableWidgetItem()
+            item = table.item(i,0).text()
+            if pid == item:
+                return False
+        return True
 
-    #@pyqtSlot()
-    #def creating_charts(self):
-    #    for i in range(7):
-     #       self.handler.gantts[i].create_gantt(self.handler.outputs[i][3])
-            #self.handler.gantts[i].create_image(self.handler.schedulers[i])
-    
     @pyqtSlot()
     def button_func(self, x, button):
         # 없는거 확인 validation
@@ -207,18 +252,22 @@ class myApp(QMainWindow, form_class):
                 QMessageBox.warning(self, 'ERROR', 'You missed something!\nPlease Enter ALL')
                 return
             # validation!! 옳은 형식인가? (priority : int, pid : string, arrival : float, burst : float)
+            # init에서 수행
 
             # validation Pid 같은거 확인. 
-
-            
 
             inputs = [input1, input2, input3, input4]
 
             #inputs넘기기?
             #표에 저장하고 한번에 넘기기?
             row = self.ui.tableWidget_processes.rowCount()
+            
+            if(row!=0 and self.find_dup(input1, row)==False):
+                QMessageBox.warning(self, 'ERROR', 'Duplicate PID!')
+                return
+
             self.ui.tableWidget_processes.setRowCount(row+1)
-    
+
             for j in range(4):
                 item = QTableWidgetItem()
                 text = inputs[j]
@@ -243,31 +292,26 @@ class myApp(QMainWindow, form_class):
 
             timeslice = self.ui.lineEdit_timeslice.text()
             if not timeslice:
-                # timeslice 숫자? 확인하기!!
                 QMessageBox.warning(self, "ERROR", "You missed timeslice!\nPlease enter TIMESLICE")
                 return
+            
 
             else:
+                # timeslice 숫자? 확인하기!!
                 self.model.sort_inputs(timeslice)
                 self.handler.main()
-                self.fill_in_results('FCFS')
-                self.fill_in_results('RR')
-                self.fill_in_results('Priority')
-                self.fill_in_results('PP')
-                self.fill_in_results('PPRR')
-                self.fill_in_results('SJF')
-                #self.fill_in_results('SRTF')
+
+                for scheduler in self.handler.schedulers:
+                    if scheduler == 'SRTF': break
+                    self.fill_in_results(scheduler)
                 
-                #self.creating_charts()
-                self.graphics('FCFS')
-                self.graphics('RR')
-                self.graphics('Priority')
-                self.graphics('PP')
-                self.graphics('PPRR')
-                self.graphics('SJF')
-                #self.graphics('FCFS')
-               
+                for scheduler in self.handler.schedulers:
+                    if scheduler == 'SRTF' : break
+                    self.graphics(scheduler)
                 
+                for scheduler in self.handler.schedulers:
+                    if scheduler == 'SRTF' : break
+                    self.fill_avg(scheduler)
                 
 
 if __name__ == '__main__':
