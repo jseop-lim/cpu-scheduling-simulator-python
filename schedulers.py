@@ -3,16 +3,17 @@ from processes import Process, ShortestFirstProcess
 from queues import Queue, PriorityQueue
 
 
-class FirstComeFirstServed:
-    is_preemptive = False  # 실행 중간에 프로세스 교체 허용?
-    is_priority = False  # ready queue가 priority queue or FIFO queue
-    is_time_slice = False  # time slice 적용?
+class Scheduler:
+    is_preemptive = None  # 실행 중간에 프로세스 교체 허용?
+    is_priority = None  # ready queue가 priority queue or FIFO queue
+    is_time_slice = None  # time slice 적용?
+    process_class = None
 
-    def __init__(self, model: Model, process_class=Process):
-        self.planned_queue = list(map(process_class, model.base_process_list))
-        self.ready_queue = PriorityQueue() if self.is_priority else Queue()  # heap 제약이 적용될 수 있음
-        self.terminated_queue = []
-        self.running = None
+    def __init__(self, model: Model):
+        self.planned_queue = list(map(self.process_class, model.base_process_list))  # 아직 도착하지 않은 프로세스
+        self.ready_queue = PriorityQueue() if self.is_priority else Queue()  # 도착했지만 실행 중이 아닌 프로세스
+        self.terminated_queue = []  # 실행이 끝나 종료된 프로세스
+        self.running = None  # 실행 중인 프로세스
         self.time_slice = model.time_slice if self.is_time_slice else max(p.burst for p in model.base_process_list)
 
         try:
@@ -68,13 +69,31 @@ class FirstComeFirstServed:
 
         print(self.now, self.running)  # TODO temp
 
+    @property
+    def avg_response(self):
+        return sum(process.response for process in self.terminated_queue) / len(self.terminated_queue)
+
+    @property
+    def avg_turnaround(self):
+        return sum(process.turnaround for process in self.terminated_queue) / len(self.terminated_queue)
+
+    @property
+    def avg_wait(self):
+        return sum(process.wait for process in self.terminated_queue) / len(self.terminated_queue)
+
+
+class FirstComeFirstServed(Scheduler):
+    is_preemptive = False  # 실행 중간에 프로세스 교체 허용?
+    is_priority = False  # ready queue가 priority queue or FIFO queue
+    is_time_slice = False  # time slice 적용?
+    process_class = Process
+
 
 class Priority(FirstComeFirstServed):
     is_priority = True
 
 
-class PriorityPreemptive(FirstComeFirstServed):
-    is_priority = True
+class PriorityPreemptive(Priority):
     is_preemptive = True
 
 
@@ -84,15 +103,13 @@ class RoundRobin(FirstComeFirstServed):
 
 class PriorityPreemptiveRR(FirstComeFirstServed):
     is_priority = True
-    is_preemptive = True
     is_time_slice = True
+    is_preemptive = True
 
 
 class ShortestJobFirst(FirstComeFirstServed):
     is_priority = True
-
-    def __init__(self, model: Model):
-        super().__init__(model, ShortestFirstProcess)
+    process_class = ShortestFirstProcess
 
 
 # class ShortestRemainingTimeFirst(ShortestJobFirst):

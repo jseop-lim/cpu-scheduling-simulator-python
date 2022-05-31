@@ -36,7 +36,7 @@ class Handler:
 
         print()
         for ps in sorted(scheduler.terminated_queue, key=lambda p: p.pid):
-            print(ps)
+            print(ps, ps.response, ps.turnaround, ps.wait)
 
         return response_times, turnaround_times, waiting_times, gantt_data
         # TODO 스케줄러 모듈이랑 이 함수랑 연결하기 - 입력? 필드?

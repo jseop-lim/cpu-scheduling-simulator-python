@@ -1,6 +1,14 @@
 from dataclasses import dataclass, field
 
 
+class BaseProcess:
+    def __init__(self, pid, arrival, burst, priority):
+        self.pid = pid
+        self.arrival = arrival
+        self.burst = burst
+        self.priority = priority
+
+
 @dataclass
 class BaseProcess:
     pid: str
@@ -29,6 +37,7 @@ class Process(BaseProcess):
         self.log = []
 
     def __lt__(self, other):
+        # TODO 동시에 도착하고 실행 중단되면 뭐가 우선?
         return (self.priority, self.enqueued_at) < (other.priority, other.enqueued_at)
 
     @property
