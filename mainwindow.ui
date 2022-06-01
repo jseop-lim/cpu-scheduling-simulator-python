@@ -6,31 +6,46 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1151</width>
-    <height>685</height>
+    <width>1155</width>
+    <height>597</height>
    </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="widget">
-   <layout class="QHBoxLayout" name="horizontalLayout_3">
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <layout class="QHBoxLayout" name="horizontalLayout_3" stretch="0,0">
+    <property name="spacing">
+     <number>7</number>
+    </property>
     <item>
      <widget class="QTabWidget" name="lefthalf">
       <property name="sizePolicy">
-       <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
         <horstretch>0</horstretch>
         <verstretch>0</verstretch>
        </sizepolicy>
       </property>
       <property name="minimumSize">
        <size>
-        <width>600</width>
+        <width>520</width>
         <height>0</height>
        </size>
       </property>
       <property name="currentIndex">
-       <number>4</number>
+       <number>2</number>
       </property>
       <property name="tabBarAutoHide">
        <bool>false</bool>
@@ -45,21 +60,6 @@
         </item>
         <item>
          <widget class="QTableWidget" name="results_fcfs">
-          <row>
-           <property name="text">
-            <string>1</string>
-           </property>
-          </row>
-          <row>
-           <property name="text">
-            <string>2</string>
-           </property>
-          </row>
-          <row>
-           <property name="text">
-            <string>3</string>
-           </property>
-          </row>
           <column>
            <property name="text">
             <string>pid</string>
@@ -84,6 +84,12 @@
         </item>
         <item>
          <widget class="QTableWidget" name="avg_fcfs">
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>70</height>
+           </size>
+          </property>
           <row>
            <property name="text">
             <string>average value</string>
@@ -117,8 +123,8 @@
          <widget class="QGraphicsView" name="gantt_priority">
           <property name="maximumSize">
            <size>
-            <width>441</width>
-            <height>91</height>
+            <width>1677725</width>
+            <height>16777215</height>
            </size>
           </property>
          </widget>
@@ -164,6 +170,12 @@
         </item>
         <item>
          <widget class="QTableWidget" name="avg_priority">
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>70</height>
+           </size>
+          </property>
           <row>
            <property name="text">
             <string>average value</string>
@@ -237,6 +249,12 @@
         </item>
         <item>
          <widget class="QTableWidget" name="avg_pp">
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>70</height>
+           </size>
+          </property>
           <row>
            <property name="text">
             <string>average value</string>
@@ -310,6 +328,12 @@
         </item>
         <item>
          <widget class="QTableWidget" name="avg_rr">
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>70</height>
+           </size>
+          </property>
           <row>
            <property name="text">
             <string>average value</string>
@@ -338,12 +362,18 @@
        <attribute name="title">
         <string>PRR</string>
        </attribute>
-       <layout class="QVBoxLayout" name="verticalLayout_6">
-        <item>
+       <layout class="QGridLayout" name="gridLayout">
+        <item row="0" column="0">
          <widget class="QGraphicsView" name="gantt_pprr"/>
         </item>
-        <item>
+        <item row="1" column="0">
          <widget class="QTableWidget" name="results_pprr">
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>250</height>
+           </size>
+          </property>
           <row>
            <property name="text">
             <string>1</string>
@@ -381,8 +411,14 @@
           </column>
          </widget>
         </item>
-        <item>
+        <item row="2" column="0">
          <widget class="QTableWidget" name="avg_pprr">
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>70</height>
+           </size>
+          </property>
           <row>
            <property name="text">
             <string>average value</string>
@@ -456,6 +492,12 @@
         </item>
         <item>
          <widget class="QTableWidget" name="avg_sjf">
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>70</height>
+           </size>
+          </property>
           <row>
            <property name="text">
             <string>average value</string>
@@ -529,6 +571,12 @@
         </item>
         <item>
          <widget class="QTableWidget" name="avg_srtf">
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>70</height>
+           </size>
+          </property>
           <row>
            <property name="text">
             <string>average value</string>
@@ -557,16 +605,34 @@
     </item>
     <item>
      <layout class="QVBoxLayout" name="righthalf">
+      <property name="spacing">
+       <number>7</number>
+      </property>
       <property name="sizeConstraint">
-       <enum>QLayout::SetMinimumSize</enum>
+       <enum>QLayout::SetMinAndMaxSize</enum>
+      </property>
+      <property name="bottomMargin">
+       <number>14</number>
       </property>
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout">
         <property name="sizeConstraint">
-         <enum>QLayout::SetMinimumSize</enum>
+         <enum>QLayout::SetMaximumSize</enum>
         </property>
         <item>
          <widget class="QLabel" name="label_timeslice">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>16777215</height>
+           </size>
+          </property>
           <property name="text">
            <string>Timeslice: </string>
           </property>
@@ -575,10 +641,16 @@
         <item>
          <widget class="QLineEdit" name="lineEdit_timeslice">
           <property name="sizePolicy">
-           <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+           <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>16777215</height>
+           </size>
           </property>
           <property name="text">
            <string>Timeslice</string>
@@ -587,6 +659,18 @@
         </item>
         <item>
          <widget class="QPushButton" name="pushButton_run">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>16777215</height>
+           </size>
+          </property>
           <property name="text">
            <string>Run</string>
           </property>
@@ -594,6 +678,18 @@
         </item>
         <item>
          <widget class="QPushButton" name="pushButton_deleteall">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>16777215</height>
+           </size>
+          </property>
           <property name="text">
            <string>Delete All</string>
           </property>
@@ -602,51 +698,58 @@
        </layout>
       </item>
       <item>
-       <widget class="QTableWidget" name="tableWidget_processes">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Fixed" vsizetype="Expanding">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
+       <layout class="QVBoxLayout" name="verticalLayout_6">
+        <property name="sizeConstraint">
+         <enum>QLayout::SetDefaultConstraint</enum>
         </property>
-        <property name="minimumSize">
-         <size>
-          <width>520</width>
-          <height>0</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>520</width>
-          <height>16777215</height>
-         </size>
-        </property>
-        <column>
-         <property name="text">
-          <string>pid</string>
-         </property>
-        </column>
-        <column>
-         <property name="text">
-          <string>arrival time</string>
-         </property>
-        </column>
-        <column>
-         <property name="text">
-          <string>burst time</string>
-         </property>
-        </column>
-        <column>
-         <property name="text">
-          <string>priority</string>
-         </property>
-        </column>
-       </widget>
+        <item>
+         <widget class="QTableWidget" name="tableWidget_processes">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>522</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>16777215</height>
+           </size>
+          </property>
+          <column>
+           <property name="text">
+            <string>pid</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>arrival time</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>burst time</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>priority</string>
+           </property>
+          </column>
+         </widget>
+        </item>
+       </layout>
       </item>
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout_2">
         <property name="sizeConstraint">
-         <enum>QLayout::SetMinimumSize</enum>
+         <enum>QLayout::SetMaximumSize</enum>
         </property>
         <item>
          <layout class="QVBoxLayout" name="verticalLayout">
@@ -657,6 +760,18 @@
             </property>
             <item>
              <widget class="QLabel" name="label_pid">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>100</width>
+                <height>16777215</height>
+               </size>
+              </property>
               <property name="text">
                <string>pid</string>
               </property>
@@ -664,6 +779,18 @@
             </item>
             <item>
              <widget class="QLabel" name="label_arrival">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>100</width>
+                <height>16777215</height>
+               </size>
+              </property>
               <property name="text">
                <string>arrival</string>
               </property>
@@ -671,6 +798,18 @@
             </item>
             <item>
              <widget class="QLabel" name="label_burst">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>100</width>
+                <height>16777215</height>
+               </size>
+              </property>
               <property name="text">
                <string>burst</string>
               </property>
@@ -678,6 +817,18 @@
             </item>
             <item>
              <widget class="QLabel" name="label_priority">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>100</width>
+                <height>16777215</height>
+               </size>
+              </property>
               <property name="text">
                <string>priority</string>
               </property>
@@ -689,6 +840,18 @@
            <layout class="QHBoxLayout" name="layout_lineEdit">
             <item>
              <widget class="QLineEdit" name="lineEdit_pid">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>100</width>
+                <height>16777215</height>
+               </size>
+              </property>
               <property name="text">
                <string>pid</string>
               </property>
@@ -696,6 +859,18 @@
             </item>
             <item>
              <widget class="QLineEdit" name="lineEdit_arrival">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>100</width>
+                <height>16777215</height>
+               </size>
+              </property>
               <property name="text">
                <string>arrival</string>
               </property>
@@ -703,6 +878,18 @@
             </item>
             <item>
              <widget class="QLineEdit" name="lineEdit_burst">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>100</width>
+                <height>16777215</height>
+               </size>
+              </property>
               <property name="text">
                <string>burst</string>
               </property>
@@ -710,6 +897,18 @@
             </item>
             <item>
              <widget class="QLineEdit" name="lineEdit_priority">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>100</width>
+                <height>16777215</height>
+               </size>
+              </property>
               <property name="text">
                <string>priority</string>
               </property>
@@ -724,8 +923,26 @@
           <property name="enabled">
            <bool>true</bool>
           </property>
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>100</width>
+            <height>16777215</height>
+           </size>
+          </property>
+          <property name="tabletTracking">
+           <bool>false</bool>
+          </property>
           <property name="text">
            <string>add</string>
+          </property>
+          <property name="shortcut">
+           <string/>
           </property>
          </widget>
         </item>
