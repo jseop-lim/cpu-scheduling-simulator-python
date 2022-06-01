@@ -116,13 +116,14 @@ class ShortestRemainingTimeFirst(ShortestJobFirst):
     is_preemptive = True
 
     def run(self):
-        run_started_at = self.now  # 현재 실행 중인 프로세스가 CPU를 사용하기 시작한 시각
+        run_time = 0
         while self.check_over():
             # save first_run time
             # context switching 직후에는 now가 왜곡되지 않는다.
             if self.running.first_run is None:
                 self.running.first_run = self.now
 
+            # TODO time slice 지나면 self.now는 증가하지만 실행 프로세스는 그대로
             next_dispatch_time = self.running.remain
 
             if self.planned_queue:
@@ -131,19 +132,14 @@ class ShortestRemainingTimeFirst(ShortestJobFirst):
                     # arrive
                     new_process = self.planned_queue.pop(0)
                     self.ready_queue.enqueue(new_process)
-                    self.execute_times(next_arrival_time)
                     # preempt by priority
-                    if self.is_preemptive and new_process < self.running:
-                        print(run_started_at, self.running)
-                        self.running.set_log(run_started_at, new_process.arrival - run_started_at)
-                        self.dispatch()
-                        run_started_at = self.now
+                    if self.is_preemptive and new_process.remain < self.running.remain - run_time:
+                        self.dispatch(next_arrival_time)
+                        run_time = 0
+                    else:
+                        run_time += next_arrival_time
                     continue
 
-            print(run_started_at, self.running)
-            self.running.set_log(run_started_at, next_dispatch_time + self.now - run_started_at)
-            self.execute_times(next_dispatch_time)
-            self.dispatch()
-            run_started_at = self.now
+            self.dispatch(next_dispatch_time)
 
         print(self.now, self.running)  # TODO temp; 종료시각 및 None 출력
