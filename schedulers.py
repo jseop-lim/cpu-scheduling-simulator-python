@@ -7,7 +7,7 @@ class Scheduler:
     is_preemptive = None  # 실행 중간에 프로세스 교체 허용?
     is_priority = None  # ready queue가 priority queue or FIFO queue
     is_time_slice = None  # time slice 적용?
-    process_class = None
+    process_class = Process
 
     def __init__(self, model: Model):
         self.planned_queue = list(map(self.process_class, model.base_process_list))  # 아직 도착하지 않은 프로세스
@@ -86,7 +86,6 @@ class FirstComeFirstServed(Scheduler):
     is_preemptive = False  # 실행 중간에 프로세스 교체 허용?
     is_priority = False  # ready queue가 priority queue or FIFO queue
     is_time_slice = False  # time slice 적용?
-    process_class = Process
 
 
 class Priority(FirstComeFirstServed):
@@ -109,21 +108,25 @@ class PriorityPreemptiveRR(FirstComeFirstServed):
 
 class ShortestJobFirst(FirstComeFirstServed):
     is_priority = True
-    process_class = ShortestFirstProcess
+    process_class = ShortestFirstProcess  # 프로세스 객체 안 바꾸면 heap에서 우선순위 비교 시 오류 발생
+
+    # def __init__(self, model: Model):
+    #     super().__init__(model)
+    #     for process in self.planned_queue:
+    #         process.priority = process.burst
 
 
 class ShortestRemainingTimeFirst(ShortestJobFirst):
     is_preemptive = True
 
     def run(self):
-        run_time = 0
+        run_time = 0  # 현재 실행 중인 프로세스가 실행 시작하고 지난 시간
         while self.check_over():
             # save first_run time
             # context switching 직후에는 now가 왜곡되지 않는다.
             if self.running.first_run is None:
                 self.running.first_run = self.now
 
-            # TODO time slice 지나면 self.now는 증가하지만 실행 프로세스는 그대로
             next_dispatch_time = self.running.remain
 
             if self.planned_queue:

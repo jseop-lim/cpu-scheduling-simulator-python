@@ -53,7 +53,7 @@ class Process(BaseProcess):
         return None if self.turnaround is None else self.turnaround - self.burst
 
     def set_log(self, start, time):
-        self.log.append([start, start+time])  # TODO gantt input에 따라 수정
+        self.log.append([start, start + time])
 
 
 class ShortestFirstProcess(Process):
