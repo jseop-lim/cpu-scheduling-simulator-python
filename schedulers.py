@@ -112,34 +112,35 @@ class ShortestJobFirst(FirstComeFirstServed):
     process_class = ShortestFirstProcess
 
 
-# class ShortestRemainingTimeFirst(ShortestJobFirst):
-#     is_preemptive = True
-#
-#     def run(self):
-#         while self.check_over():
-#             # save first_run time
-#             if self.running.first_run is None:
-#                 self.running.first_run = self.now
-#
-#             # TODO time slice 지나면 self.now는 증가하지만 실행 프로세스는 그대로
-#             next_dispatch_time = self.running.remain
-#
-#             if self.planned_queue:
-#                 next_arrival_time = self.planned_queue[0].arrival - self.now
-#                 if next_arrival_time <= next_dispatch_time:
-#                     # arrive
-#                     new_process = self.planned_queue.pop(0)
-#                     self.ready_queue.enqueue(new_process)
-#                     print('before', self.now, new_process.remain, self.running.remain)
-#                     self.execute_times(next_arrival_time)
-#                     print('after', self.now, new_process.remain, self.running.remain)
-#                     # preempt by priority
-#                     if self.is_preemptive and new_process < self.running:
-#                         print(self.now - next_arrival_time, self.running)
-#                         self.running.set_log(self.now - next_arrival_time, next_arrival_time)
-#                         self.dispatch()
-#                     continue
-#
-#             self.dispatch(next_dispatch_time)
-#
-#         print(self.now, self.running)  # TODO temp
+class ShortestRemainingTimeFirst(ShortestJobFirst):
+    is_preemptive = True
+
+    def run(self):
+        while self.check_over():
+            # save first_run time
+            # context switching 직후에는 now가 왜곡되지 않는다.
+            if self.running.first_run is None:
+                self.running.first_run = self.now
+
+            # TODO time slice 지나면 self.now는 증가하지만 실행 프로세스는 그대로
+            next_dispatch_time = self.running.remain
+
+            if self.planned_queue:
+                next_arrival_time = self.planned_queue[0].arrival - self.now
+                if next_arrival_time <= next_dispatch_time:
+                    # arrive
+                    new_process = self.planned_queue.pop(0)
+                    self.ready_queue.enqueue(new_process)
+                    # print('before', self.now, new_process.remain, self.running.remain)
+                    self.execute_times(next_arrival_time)
+                    # print('after', self.now, new_process.remain, self.running.remain)
+                    # preempt by priority
+                    if self.is_preemptive and new_process < self.running:
+                        print(self.now - next_arrival_time, self.running)
+                        self.running.set_log(self.now - next_arrival_time, next_arrival_time)
+                        self.dispatch()
+                    continue
+
+            self.dispatch(next_dispatch_time)
+
+        print(self.now, self.running)  # TODO temp; 종료시각 및 None 출력

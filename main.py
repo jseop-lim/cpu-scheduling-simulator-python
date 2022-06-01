@@ -2,7 +2,7 @@ from input import Model
 from schedulers import (
     FirstComeFirstServed, RoundRobin,
     Priority, PriorityPreemptive, PriorityPreemptiveRR,
-    ShortestJobFirst#, ShortestRemainingTimeFirst
+    ShortestJobFirst, ShortestRemainingTimeFirst
 )
 
 
@@ -10,7 +10,7 @@ class Handler:
     scheduler_list = (
         FirstComeFirstServed, RoundRobin,
         Priority, PriorityPreemptive, PriorityPreemptiveRR,
-        ShortestJobFirst#, ShortestRemainingTimeFirst
+        ShortestJobFirst, ShortestRemainingTimeFirst
     )
 
     def __init__(self, path=None):
