@@ -13,7 +13,7 @@ class Handler:
         Priority, PriorityPreemptive, PriorityRR,
         ShortestJobFirst, ShortestRemainingTimeFirst
     )
-    scheduler_names = [
+    schedulers = [
         'FCFS', 'RR', 'Priority', 'PP', 'PRR', 'SJF', 'SRTF'
     ]
 
@@ -61,7 +61,7 @@ class Handler:
             output = self.run_scheduler(Scheduler)
             self.outputs.append(output)
             self.gantt = Gantt()
-            self.gantt.create_gantt(self.outputs[i][3], self.scheduler_names[i])
+            self.gantt.create_gantt(self.outputs[i][3], self.schedulers[i])
 
 
 if __name__ == '__main__':

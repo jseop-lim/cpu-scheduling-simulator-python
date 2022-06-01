@@ -53,10 +53,10 @@ class Gantt:
             xaxis_type = 'linear', 
             showlegend = True, 
             xaxis = dict(
-                showticklabels = True,
-                showgrid = True,
-                gridcolor = 'gray',
-                linecolor = 'gray',
+                showticklabels = False,
+                showgrid = False,
+                # gridcolor = 'gray',
+                # linecolor = 'gray',
             )
         )
         
