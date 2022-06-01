@@ -3,16 +3,17 @@ from processes import Process, ShortestFirstProcess
 from queues import Queue, PriorityQueue
 
 
-class FirstComeFirstServed:
-    is_preemptive = False  # 실행 중간에 프로세스 교체 허용?
-    is_priority = False  # ready queue가 priority queue or FIFO queue
-    is_time_slice = False  # time slice 적용?
+class Scheduler:
+    is_preemptive = None  # 실행 중간에 프로세스 교체 허용?
+    is_priority = None  # ready queue가 priority queue or FIFO queue
+    is_time_slice = None  # time slice 적용?
+    process_class = Process
 
-    def __init__(self, model: Model, process_class=Process):
-        self.planned_queue = list(map(process_class, model.base_process_list))
-        self.ready_queue = PriorityQueue() if self.is_priority else Queue()  # heap 제약이 적용될 수 있음
-        self.terminated_queue = []
-        self.running = None
+    def __init__(self, model: Model):
+        self.planned_queue = list(map(self.process_class, model.base_process_list))  # 아직 도착하지 않은 프로세스
+        self.ready_queue = PriorityQueue() if self.is_priority else Queue()  # 도착했지만 실행 중이 아닌 프로세스
+        self.terminated_queue = []  # 실행이 끝나 종료된 프로세스
+        self.running = None  # 실행 중인 프로세스
         self.time_slice = model.time_slice if self.is_time_slice else max(p.burst for p in model.base_process_list)
 
         try:
@@ -68,6 +69,24 @@ class FirstComeFirstServed:
 
         print(self.now, self.running)  # TODO temp
 
+    @property
+    def avg_response(self):
+        return sum(process.response for process in self.terminated_queue) / len(self.terminated_queue)
+
+    @property
+    def avg_turnaround(self):
+        return sum(process.turnaround for process in self.terminated_queue) / len(self.terminated_queue)
+
+    @property
+    def avg_wait(self):
+        return sum(process.wait for process in self.terminated_queue) / len(self.terminated_queue)
+
+
+class FirstComeFirstServed(Scheduler):
+    is_preemptive = False  # 실행 중간에 프로세스 교체 허용?
+    is_priority = False  # ready queue가 priority queue or FIFO queue
+    is_time_slice = False  # time slice 적용?
+
 
 class Priority(FirstComeFirstServed):
     is_priority = True
@@ -82,47 +101,48 @@ class RoundRobin(FirstComeFirstServed):
     is_time_slice = True
 
 
-class PriorityPreemptiveRR(FirstComeFirstServed):
+class PriorityRR(FirstComeFirstServed):
     is_priority = True
-    is_preemptive = True
     is_time_slice = True
 
 
 class ShortestJobFirst(FirstComeFirstServed):
     is_priority = True
+    process_class = ShortestFirstProcess  # 프로세스 객체 안 바꾸면 heap에서 우선순위 비교 시 오류 발생
 
-    def __init__(self, model: Model):
-        super().__init__(model, ShortestFirstProcess)
+    # def __init__(self, model: Model):
+    #     super().__init__(model)
+    #     for process in self.planned_queue:
+    #         process.priority = process.burst
 
 
-# class ShortestRemainingTimeFirst(ShortestJobFirst):
-#     is_preemptive = True
-#
-#     def run(self):
-#         while self.check_over():
-#             # save first_run time
-#             if self.running.first_run is None:
-#                 self.running.first_run = self.now
-#
-#             # TODO time slice 지나면 self.now는 증가하지만 실행 프로세스는 그대로
-#             next_dispatch_time = self.running.remain
-#
-#             if self.planned_queue:
-#                 next_arrival_time = self.planned_queue[0].arrival - self.now
-#                 if next_arrival_time <= next_dispatch_time:
-#                     # arrive
-#                     new_process = self.planned_queue.pop(0)
-#                     self.ready_queue.enqueue(new_process)
-#                     print('before', self.now, new_process.remain, self.running.remain)
-#                     self.execute_times(next_arrival_time)
-#                     print('after', self.now, new_process.remain, self.running.remain)
-#                     # preempt by priority
-#                     if self.is_preemptive and new_process < self.running:
-#                         print(self.now - next_arrival_time, self.running)
-#                         self.running.set_log(self.now - next_arrival_time, next_arrival_time)
-#                         self.dispatch()
-#                     continue
-#
-#             self.dispatch(next_dispatch_time)
-#
-#         print(self.now, self.running)  # TODO temp
+class ShortestRemainingTimeFirst(ShortestJobFirst):
+    is_preemptive = True
+
+    def run(self):
+        run_time = 0  # 현재 실행 중인 프로세스가 실행 시작하고 지난 시간
+        while self.check_over():
+            # save first_run time
+            # context switching 직후에는 now가 왜곡되지 않는다.
+            if self.running.first_run is None:
+                self.running.first_run = self.now
+
+            next_dispatch_time = self.running.remain
+
+            if self.planned_queue:
+                next_arrival_time = self.planned_queue[0].arrival - self.now
+                if next_arrival_time <= next_dispatch_time:
+                    # arrive
+                    new_process = self.planned_queue.pop(0)
+                    self.ready_queue.enqueue(new_process)
+                    # preempt by priority
+                    if self.is_preemptive and new_process.remain < self.running.remain - run_time:
+                        self.dispatch(next_arrival_time)
+                        run_time = 0
+                    else:
+                        run_time += next_arrival_time
+                    continue
+
+            self.dispatch(next_dispatch_time)
+
+        print(self.now, self.running)  # TODO temp; 종료시각 및 None 출력
