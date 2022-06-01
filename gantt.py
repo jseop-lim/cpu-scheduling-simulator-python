@@ -15,7 +15,11 @@ class Gantt:
     def __init__(self):
         self.data = []
         
-    def create_gantt(self,data, ver):
+    def create_gantt(self, data, ver):
+        """
+        scheduler log를 data로 입력받아 image 파일을 생성
+        ver: scheduler 이름
+        """
         self.data = data
         #labels = self.data.keys()
         df = []
@@ -56,11 +60,7 @@ class Gantt:
             )
         )
         
-        self.fig.layout.xaxis['tickfont'] = {'size' : 40}
-        #self.fig['layout']['annotations'] = annots
-        #self.fig.add_annotations(annots)
-        #self.fig['layout']['annotations'] = tick
-        #self.fig.update_layout({'annotations' : [annots]})
+        self.fig.layout.xaxis['tickfont'] = {'size': 40}
 
         self.fig['layout'].update(
             annotations= annots
@@ -70,9 +70,9 @@ class Gantt:
         if not os.path.exists(os.path.join(path, 'html')):
             os.makedirs(os.path.join(path, 'html'))
 
-        filepath = os.path.join(path, 'html/image_' +ver+'.html')
+        filepath = os.path.join(path, 'html/image_' + ver +'.html')
         pio.write_html(self.fig, filepath)
-        filename = os.path.join(path,'image/'+ver+'.png')
+        filename = os.path.join(path,'image/'+ ver +'.png')
 
         with open(filepath) as f:
             if ver == 'FCFS':
@@ -96,24 +96,3 @@ class Gantt:
             elif ver == 'SRTF':
                 hti.screenshot(f.read(), save_as = 'image_SRTF.png')
                 f.close()
-    
-    def create_image(self, ver):
-        #filename = os.path.join(path,'html/image_'+ver+'.html')
-        
-        filepath = os.path.join(path, 'html/image_' +ver+'.html')
-        with open(filepath) as f:
-            filename = os.path.join(path,'image/'+ver+'.png')
-            hti.screenshot(f.read(), save_as = filename)
-            f.close()
-           
-        
-
-
-'''
-if __name__ == '__main__':
-    data = {'pid': [[0, 2], [3,6]], 'pid2' : [[2,3]]}
-    app = Gantt()
-    app.create_gantt(data)
-    app.create_image('gantt_test')
-'''    
-    

@@ -1,22 +1,15 @@
 import sys
 from PyQt5.QtWidgets import *
 from PyQt5 import uic
-from PyQt5.QtCore import Qt
 from PyQt5.QtGui import *
-from PyQt5.QtWebEngine import *
 import os
 from PyQt5.QtCore import pyqtSlot
-from processes import BaseProcess
 from input import Model 
 from main import Handler
-from processes import BaseProcess
-from gantt import Gantt
-from PyQt5.QtWebEngineWidgets import *
-import plotly.io as pio
 from html2image import Html2Image
 
 ui_path = os.path.dirname(os.path.abspath(__file__))
-form_class= uic.loadUiType(os.path.join(ui_path, "mainwindow.ui"))[0]
+form_class = uic.loadUiType(os.path.join(ui_path, "mainwindow.ui"))[0]
 
 hti = Html2Image()
 
@@ -297,7 +290,6 @@ class myApp(QMainWindow, form_class):
             if not timeslice:
                 QMessageBox.warning(self, "ERROR", "You missed timeslice!\nPlease enter TIMESLICE")
                 return
-            
 
             else:
                 self.model.sort_inputs(timeslice)
@@ -305,15 +297,12 @@ class myApp(QMainWindow, form_class):
                 self.handler.main()
                 
                 for scheduler in self.handler.schedulers:
-                    #if scheduler == 'SRTF': break
                     self.fill_in_results(scheduler)
                 
                 for scheduler in self.handler.schedulers:
-                    #if scheduler == 'SRTF' : break
                     self.graphics(scheduler)
                 
                 for scheduler in self.handler.schedulers:
-                    #if scheduler == 'SRTF' : break
                     self.fill_avg(scheduler)
                 
 

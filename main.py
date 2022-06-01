@@ -13,7 +13,7 @@ class Handler:
         Priority, PriorityPreemptive, PriorityRR,
         ShortestJobFirst, ShortestRemainingTimeFirst
     )
-    schedulers = [
+    scheduler_names = [
         'FCFS', 'RR', 'Priority', 'PP', 'PRR', 'SJF', 'SRTF'
     ]
 
@@ -42,15 +42,18 @@ class Handler:
         waiting_times = {process.pid: process.wait for process in scheduler.terminated_queue}
         gantt_data = {process.pid: process.log for process in scheduler.terminated_queue}
         
-        avg = {'avg_response' : scheduler.avg_response, 'avg_turnaround' : scheduler.avg_turnaround, 'avg_wait':scheduler.avg_wait}
+        avg_times = {'avg_response' : scheduler.avg_response, 'avg_turnaround' : scheduler.avg_turnaround, 'avg_wait':scheduler.avg_wait}
         print()
         for ps in sorted(scheduler.terminated_queue, key=lambda p: p.pid):
             print(ps, ps.response, ps.turnaround, ps.wait)
 
-        return response_times, turnaround_times, waiting_times, gantt_data, avg #avg_response, avg_turnaround,avg_waiting
+        return response_times, turnaround_times, waiting_times, gantt_data, avg_times
         # TODO 스케줄러 모듈이랑 이 함수랑 연결하기 - 입력? 필드?
 
     def main(self):
+        """
+        scheduler 각각 실행하고 outputs에 times 저장, gantt chart image files 생성
+        """
         self.outputs = []  # run_scheduler()의 반환값
         self.gantts = []
         for i, Scheduler in enumerate(self.scheduler_list):
@@ -58,7 +61,7 @@ class Handler:
             output = self.run_scheduler(Scheduler)
             self.outputs.append(output)
             self.gantt = Gantt()
-            self.gantt.create_gantt(self.outputs[i][3], self.schedulers[i])
+            self.gantt.create_gantt(self.outputs[i][3], self.scheduler_names[i])
 
 if __name__ == '__main__':
     handler = Handler(path='input.txt')
