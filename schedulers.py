@@ -92,7 +92,8 @@ class Priority(FirstComeFirstServed):
     is_priority = True
 
 
-class PriorityPreemptive(Priority):
+class PriorityPreemptive(FirstComeFirstServed):
+    is_priority = True
     is_preemptive = True
 
 
@@ -100,10 +101,9 @@ class RoundRobin(FirstComeFirstServed):
     is_time_slice = True
 
 
-class PriorityPreemptiveRR(FirstComeFirstServed):
+class PriorityRR(FirstComeFirstServed):
     is_priority = True
     is_time_slice = True
-    is_preemptive = True
 
 
 class ShortestJobFirst(FirstComeFirstServed):
