@@ -15,9 +15,11 @@ class Handler:
     schedulers = [
         'FCFS', 'RR', 'Priority', 'PP', 'PPRR', 'SJF', 'SRTF'
     ]
+
     def __init__(self):
         self.outputs = []
         self.gantts = []
+
     #def __init__(self):#, path=None):
         #if path:
         #self.model = Model()#.create_from_file(path)
@@ -48,7 +50,7 @@ class Handler:
         # TODO 스케줄러 모듈이랑 이 함수랑 연결하기 - 입력? 필드?
 
     def main(self):
-        self.outputs = []
+        self.outputs = []  # run_scheduler()의 반환값
         self.gantts = []
         for i, Scheduler in enumerate(self.scheduler_list):
             print(Scheduler.__name__, i)

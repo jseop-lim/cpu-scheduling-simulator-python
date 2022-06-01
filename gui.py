@@ -300,8 +300,6 @@ class myApp(QMainWindow, form_class):
             
 
             else:
-                # timeslice 숫자? 확인하기!!
-                self.__init__
                 self.model.sort_inputs(timeslice)
              
                 self.handler.main()

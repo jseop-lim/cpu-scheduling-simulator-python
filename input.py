@@ -28,7 +28,6 @@ class Model:
             # arrival time의 오름차순으로 정렬
             self.base_process_list.sort(key=lambda p: p.arrival)
             self.time_slice = int(f.readline())
-
     
     def add_input(self, inputs):
         row = inputs.split()
