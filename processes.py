@@ -1,11 +1,13 @@
 from dataclasses import dataclass, field
 
+
 class BaseProcess:
     def __init__(self, pid, arrival, burst, priority):
         self.pid = pid
         self.arrival = arrival
         self.burst = burst
         self.priority = priority
+
         
 @dataclass
 class BaseProcess:
@@ -35,6 +37,7 @@ class Process(BaseProcess):
         self.log = []
 
     def __lt__(self, other):
+        # TODO 동시에 도착하고 실행 중단되면 뭐가 우선?
         return (self.priority, self.enqueued_at) < (other.priority, other.enqueued_at)
 
     @property
@@ -50,7 +53,7 @@ class Process(BaseProcess):
         return None if self.turnaround is None else self.turnaround - self.burst
 
     def set_log(self, start, time):
-        self.log.append([start, start+time])  # TODO gantt input에 따라 수정
+        self.log.append([start, start + time])
 
 
 class ShortestFirstProcess(Process):
