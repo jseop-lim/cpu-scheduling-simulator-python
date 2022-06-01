@@ -1,19 +1,20 @@
 from input import Model
 from schedulers import (
     FirstComeFirstServed, RoundRobin,
-    Priority, PriorityPreemptive, PriorityPreemptiveRR,
+    Priority, PriorityPreemptive, PriorityRR,
     ShortestJobFirst, ShortestRemainingTimeFirst
 )
 from gantt import Gantt
 
+
 class Handler:
     scheduler_list = (
         FirstComeFirstServed, RoundRobin,
-        Priority, PriorityPreemptive, PriorityPreemptiveRR,
+        Priority, PriorityPreemptive, PriorityRR,
         ShortestJobFirst, ShortestRemainingTimeFirst
     )
     schedulers = [
-        'FCFS', 'RR', 'Priority', 'PP', 'PPRR', 'SJF', 'SRTF'
+        'FCFS', 'RR', 'Priority', 'PP', 'PRR', 'SJF', 'SRTF'
     ]
 
     def __init__(self):

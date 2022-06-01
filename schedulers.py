@@ -87,25 +87,6 @@ class FirstComeFirstServed(Scheduler):
     is_preemptive = False  # 실행 중간에 프로세스 교체 허용?
     is_priority = False  # ready queue가 priority queue or FIFO queue
     is_time_slice = False  # time slice 적용?
-    process_class = Process
-
-    @property
-    def avg_response(self):
-        return sum(process.response for process in self.terminated_queue) / len(self.terminated_queue)
-
-    @property
-    def avg_turnaround(self):
-        return sum(process.turnaround for process in self.terminated_queue) / len(self.terminated_queue)
-
-    @property
-    def avg_wait(self):
-        return sum(process.wait for process in self.terminated_queue) / len(self.terminated_queue)
-
-
-class FirstComeFirstServed(Scheduler):
-    is_preemptive = False  # 실행 중간에 프로세스 교체 허용?
-    is_priority = False  # ready queue가 priority queue or FIFO queue
-    is_time_slice = False  # time slice 적용?
 
 
 class Priority(FirstComeFirstServed):
