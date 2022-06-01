@@ -63,6 +63,7 @@ class Handler:
             self.gantt = Gantt()
             self.gantt.create_gantt(self.outputs[i][3], self.scheduler_names[i])
 
+
 if __name__ == '__main__':
     handler = Handler(path='input.txt')
     handler.main()

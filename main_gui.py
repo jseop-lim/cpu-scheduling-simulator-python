@@ -5,7 +5,7 @@ from PyQt5.QtGui import *
 import os
 from PyQt5.QtCore import pyqtSlot
 from input import Model 
-from main import Handler
+from handler import Handler
 from html2image import Html2Image
 
 ui_path = os.path.dirname(os.path.abspath(__file__))
@@ -22,7 +22,7 @@ class myApp(QMainWindow, form_class):
         self.model = Model()
         self.handler = Handler()
         self.handler.model = self.model
-        lineEdit_list = [self.ui.lineEdit_arrival, 
+        lineEdit_list = [self.ui.lineEdit_arrival,
                          self.ui.lineEdit_burst,
                          self.ui.lineEdit_pid,
                          self.ui.lineEdit_priority,
