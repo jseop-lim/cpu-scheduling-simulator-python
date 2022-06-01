@@ -20,22 +20,30 @@ class Gantt:
         #labels = self.data.keys()
         df = []
         annots = []
-
+        ticks = []
         for pid, time in self.data.items():
             d = {}
             annot_d = {}
+            tick = {}
             if isinstance(time, list):
                 for nested in time:
                     d = dict(Task = "Gantt", Subtask = pid, Start = nested[0], Finish = nested[1], Resource= pid)
                     df.append(d)
                     d = {}
-                    annot_d = dict(x=(nested[0]+nested[1])/2, text = pid, showarrow=False, font = dict(color = 'black', size = 54))
+                    annot_d = dict(x=(nested[0]+nested[1])/2, text = pid, showarrow=False, font = dict(color = 'black', size =48))
                     annots.append(annot_d)
                     annot_d = {}
+                    tick = dict(x=nested[1], text = str(nested[1]), showarrow = False )
+                    ticks.append(tick)
+                    tick = {}
+                    
             else : 
                 d = dict(Task = "Gantt", Subtask = pid, Start = time[0], Finish = time[1], Resource = pid)
                 df.append(d)
                 annots.append(annot_d)
+                ticks.append(tick)
+               
+
         self.fig = ff.create_gantt(df, index_col = 'Subtask', group_tasks = True)
         self.fig.update_layout(
             xaxis_type = 'linear', 
@@ -47,8 +55,11 @@ class Gantt:
                 linecolor = 'gray',
             )
         )
+        
         self.fig.layout.xaxis['tickfont'] = {'size' : 40}
         self.fig['layout']['annotations'] = annots
+        #self.fig.add_annotations(annots)
+        #self.fig['layout']['annotations'] = tick
         
         #self.fig.show()
         if not os.path.exists(os.path.join(path, 'html')):
@@ -65,8 +76,8 @@ class Gantt:
             elif ver == 'PP' :
                 hti.screenshot(f.read(), save_as = 'image_PP.png')
                 f.close() 
-            elif ver == 'PPRR' :
-                hti.screenshot(f.read(), save_as = 'image_PPRR.png')
+            elif ver == 'PRR' :
+                hti.screenshot(f.read(), save_as = 'image_PRR.png')
                 f.close() 
             elif ver == 'Priority' :
                 hti.screenshot(f.read(), save_as = 'image_Priority.png')
@@ -77,7 +88,9 @@ class Gantt:
             elif ver == 'SJF' :
                 hti.screenshot(f.read(), save_as = 'image_SJF.png')
                 f.close() 
-
+            elif ver == 'SRTF':
+                hti.screenshot(f.read(), save_as = 'image_SRTF.png')
+                f.close()
     
     def create_image(self, ver):
         #filename = os.path.join(path,'html/image_'+ver+'.html')

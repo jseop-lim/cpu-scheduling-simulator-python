@@ -61,7 +61,7 @@ class myApp(QMainWindow, form_class):
         scene = QGraphicsScene()
         #pname = 'image_'+tab+'.png'
         pixmap = QPixmap('image_'+tab+'.png')
-        pixmap = pixmap.scaledToWidth(440)
+        pixmap = pixmap.scaledToWidth(540)
         
         if tab == 'FCFS':
             view =self.ui.gantt_fcfs
@@ -71,7 +71,7 @@ class myApp(QMainWindow, form_class):
             view = self.ui.gantt_rr
         elif tab == 'PP' :
             view = self.ui.gantt_pp
-        elif tab =='PPRR' :
+        elif tab =='PRR' :
             view = self.ui.gantt_pprr
         elif tab == 'SJF':
             view = self.ui.gantt_sjf
@@ -109,7 +109,7 @@ class myApp(QMainWindow, form_class):
             for i, time in enumerate(times):
                 self.ui.avg_pp.setItem(0, i, QTableWidgetItem(str(avg[time])))
 
-        elif tab == 'PPRR':
+        elif tab == 'PRR':
             avg= self.handler.outputs[4][4] #PPRR's avg times
             times =avg.keys()
             for i, time in enumerate(times):
@@ -187,7 +187,7 @@ class myApp(QMainWindow, form_class):
                 self.ui.results_pp.setItem(i,3,QTableWidgetItem(str(waiting[id])))
             
                 
-        elif tab == 'PPRR':
+        elif tab == 'PRR':
             response = self.handler.outputs[4][0] # PPRR's waiting time
             turnaround = self.handler.outputs[4][1] # PPRR's turnaround time
             waiting = self.handler.outputs[4][2]  # PPRR's waiting time
@@ -305,15 +305,15 @@ class myApp(QMainWindow, form_class):
                 self.handler.main()
                 
                 for scheduler in self.handler.schedulers:
-                    if scheduler == 'SRTF': break
+                    #if scheduler == 'SRTF': break
                     self.fill_in_results(scheduler)
                 
                 for scheduler in self.handler.schedulers:
-                    if scheduler == 'SRTF' : break
+                    #if scheduler == 'SRTF' : break
                     self.graphics(scheduler)
                 
                 for scheduler in self.handler.schedulers:
-                    if scheduler == 'SRTF' : break
+                    #if scheduler == 'SRTF' : break
                     self.fill_avg(scheduler)
                 
 
