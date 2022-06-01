@@ -30,20 +30,20 @@ class Gantt:
                     d = dict(Task = "Gantt", Subtask = pid, Start = nested[0], Finish = nested[1], Resource= pid)
                     df.append(d)
                     d = {}
-                    annot_d = dict(x=(nested[0]+nested[1])/2, text = pid, showarrow=False, font = dict(color = 'black', size =48))
+                    annot_d = dict(x=(nested[0]+nested[1])/2, text = pid, showarrow=False, font = dict(color = 'black', size =40))
                     annots.append(annot_d)
                     annot_d = {}
-                    tick = dict(x=nested[1], text = str(nested[1]), showarrow = False )
-                    ticks.append(tick)
+                    tick = dict(x=nested[1], y = -0.5,  text = str(nested[1]), showarrow = False, font = dict(color='red',size = 32 ) )
+                    annots.append(tick)
                     tick = {}
                     
             else : 
                 d = dict(Task = "Gantt", Subtask = pid, Start = time[0], Finish = time[1], Resource = pid)
                 df.append(d)
                 annots.append(annot_d)
-                ticks.append(tick)
+                annots.append(tick)
                
-
+        annots.append(dict(x=0, y = -0.5, text = '0',  showarrow = False, font = dict(color='red',size = 32 )))
         self.fig = ff.create_gantt(df, index_col = 'Subtask', group_tasks = True)
         self.fig.update_layout(
             xaxis_type = 'linear', 
@@ -57,9 +57,14 @@ class Gantt:
         )
         
         self.fig.layout.xaxis['tickfont'] = {'size' : 40}
-        self.fig['layout']['annotations'] = annots
+        #self.fig['layout']['annotations'] = annots
         #self.fig.add_annotations(annots)
         #self.fig['layout']['annotations'] = tick
+        #self.fig.update_layout({'annotations' : [annots]})
+
+        self.fig['layout'].update(
+            annotations= annots
+        )
         
         #self.fig.show()
         if not os.path.exists(os.path.join(path, 'html')):
