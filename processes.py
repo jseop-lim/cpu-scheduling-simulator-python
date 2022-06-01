@@ -8,7 +8,7 @@ class BaseProcess:
         self.burst = burst
         self.priority = priority
 
-
+        
 @dataclass
 class BaseProcess:
     pid: str

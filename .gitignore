@@ -2,4 +2,6 @@
 .vscode
 *.pyc
 __pycache__
+*.png
+html/
 ~$*

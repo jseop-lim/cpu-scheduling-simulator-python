@@ -1,3 +1,4 @@
+  
 from input import Model
 from processes import Process, ShortestFirstProcess
 from queues import Queue, PriorityQueue
@@ -68,6 +69,25 @@ class Scheduler:
             self.dispatch(next_dispatch_time)
 
         print(self.now, self.running)  # TODO temp
+        
+    @property
+    def avg_response(self):
+        return sum(process.response for process in self.terminated_queue) / len(self.terminated_queue)
+
+    @property
+    def avg_turnaround(self):
+        return sum(process.turnaround for process in self.terminated_queue) / len(self.terminated_queue)
+
+    @property
+    def avg_wait(self):
+        return sum(process.wait for process in self.terminated_queue) / len(self.terminated_queue)
+
+
+class FirstComeFirstServed(Scheduler):
+    is_preemptive = False  # 실행 중간에 프로세스 교체 허용?
+    is_priority = False  # ready queue가 priority queue or FIFO queue
+    is_time_slice = False  # time slice 적용?
+    process_class = Process
 
     @property
     def avg_response(self):
@@ -92,8 +112,7 @@ class Priority(FirstComeFirstServed):
     is_priority = True
 
 
-class PriorityPreemptive(FirstComeFirstServed):
-    is_priority = True
+class PriorityPreemptive(Priority):
     is_preemptive = True
 
 
@@ -104,6 +123,7 @@ class RoundRobin(FirstComeFirstServed):
 class PriorityRR(FirstComeFirstServed):
     is_priority = True
     is_time_slice = True
+    is_preemptive = False
 
 
 class ShortestJobFirst(FirstComeFirstServed):

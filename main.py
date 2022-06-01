@@ -4,7 +4,7 @@ from schedulers import (
     Priority, PriorityPreemptive, PriorityPreemptiveRR,
     ShortestJobFirst, ShortestRemainingTimeFirst
 )
-
+from gantt import Gantt
 
 class Handler:
     scheduler_list = (
@@ -12,12 +12,19 @@ class Handler:
         Priority, PriorityPreemptive, PriorityPreemptiveRR,
         ShortestJobFirst, ShortestRemainingTimeFirst
     )
+    schedulers = [
+        'FCFS', 'RR', 'Priority', 'PP', 'PPRR', 'SJF', 'SRTF'
+    ]
 
-    def __init__(self, path=None):
-        if path:
-            self.model = Model.create_from_file(path)
-        else:
-            raise ValueError('파일 경로를 입력하세요.')
+    def __init__(self):
+        self.outputs = []
+        self.gantts = []
+
+    #def __init__(self):#, path=None):
+        #if path:
+        #self.model = Model()#.create_from_file(path)
+        #else:
+        #    raise ValueError('파일 경로를 입력하세요.')
 
     def run_scheduler(self, scheduler_class):
         """
@@ -33,20 +40,24 @@ class Handler:
         turnaround_times = {process.pid: process.turnaround for process in scheduler.terminated_queue}
         waiting_times = {process.pid: process.wait for process in scheduler.terminated_queue}
         gantt_data = {process.pid: process.log for process in scheduler.terminated_queue}
-
+        
+        avg = {'avg_response' : scheduler.avg_response, 'avg_turnaround' : scheduler.avg_turnaround, 'avg_wait':scheduler.avg_wait}
         print()
         for ps in sorted(scheduler.terminated_queue, key=lambda p: p.pid):
             print(ps, ps.response, ps.turnaround, ps.wait)
 
-        return response_times, turnaround_times, waiting_times, gantt_data
+        return response_times, turnaround_times, waiting_times, gantt_data, avg #avg_response, avg_turnaround,avg_waiting
         # TODO 스케줄러 모듈이랑 이 함수랑 연결하기 - 입력? 필드?
 
     def main(self):
-        for Scheduler in self.scheduler_list:
-            print(Scheduler.__name__)
+        self.outputs = []  # run_scheduler()의 반환값
+        self.gantts = []
+        for i, Scheduler in enumerate(self.scheduler_list):
+            print(Scheduler.__name__, i)
             output = self.run_scheduler(Scheduler)
-            print(output[3], '\n')
-
+            self.outputs.append(output)
+            self.gantt = Gantt()
+            self.gantt.create_gantt(self.outputs[i][3], self.schedulers[i])
 
 if __name__ == '__main__':
     handler = Handler(path='input.txt')
