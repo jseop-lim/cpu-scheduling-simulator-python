@@ -38,26 +38,24 @@ class Handler:
         turnaround_times = {process.pid: process.turnaround for process in scheduler.terminated_queue}
         waiting_times = {process.pid: process.wait for process in scheduler.terminated_queue}
         gantt_data = {process.pid: process.log for process in scheduler.terminated_queue}
-
+        
+        avg = {'avg_response' : scheduler.avg_response, 'avg_turnaround' : scheduler.avg_turnaround, 'avg_wait':scheduler.avg_wait}
         print()
         for ps in sorted(scheduler.terminated_queue, key=lambda p: p.pid):
-            print(ps)
+            print(ps, ps.response, ps.turnaround, ps.wait)
 
-        return response_times, turnaround_times, waiting_times, gantt_data
+        return response_times, turnaround_times, waiting_times, gantt_data, avg #avg_response, avg_turnaround,avg_waiting
         # TODO 스케줄러 모듈이랑 이 함수랑 연결하기 - 입력? 필드?
 
     def main(self):
+        self.outputs = []
+        self.gantts = []
         for i, Scheduler in enumerate(self.scheduler_list):
             print(Scheduler.__name__, i)
-            self.outputs.append(self.run_scheduler(Scheduler))
-            print('response time : ',self.outputs[i][0],'\n')
-            print('turnaround time: ', self.outputs[i][1], '\n')
-            print('waiting time : ' , self.outputs[i][2], '\n')
-            
+            output = self.run_scheduler(Scheduler)
+            self.outputs.append(output)
             self.gantt = Gantt()
             self.gantt.create_gantt(self.outputs[i][3], self.schedulers[i])
-            #self.gantt.create_image(self.schedulers[i])
-       
 
 if __name__ == '__main__':
     handler = Handler(path='input.txt')

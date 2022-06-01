@@ -61,7 +61,7 @@ class myApp(QMainWindow, form_class):
         scene = QGraphicsScene()
         #pname = 'image_'+tab+'.png'
         pixmap = QPixmap('image_'+tab+'.png')
-        pixmap = pixmap.scaledToWidth(400)
+        pixmap = pixmap.scaledToWidth(440)
         
         if tab == 'FCFS':
             view =self.ui.gantt_fcfs
@@ -84,7 +84,9 @@ class myApp(QMainWindow, form_class):
     @pyqtSlot()
     def fill_avg(self, tab):
         if tab == 'FCFS':
+            
             avg = self.handler.outputs[0][4] # FCFS' avg times
+            print('avg:',avg)
             times = avg.keys()
             for i, time in enumerate(times):
                 self.ui.avg_fcfs.setItem(0,i, QTableWidgetItem(str(avg[time])))
@@ -284,6 +286,7 @@ class myApp(QMainWindow, form_class):
             self.ui.tableWidget_processes.setRowCount(0)
             self.ui.gantt_fcfs.items().clear()
             self.ui.gantt_priority.items().clear()
+            self.model.base_process_list.clear()
 
         elif(exp =='Run'):
             if(len(self.model.base_process_list)<=0) :
@@ -298,9 +301,11 @@ class myApp(QMainWindow, form_class):
 
             else:
                 # timeslice 숫자? 확인하기!!
+                self.__init__
                 self.model.sort_inputs(timeslice)
+             
                 self.handler.main()
-
+                
                 for scheduler in self.handler.schedulers:
                     if scheduler == 'SRTF': break
                     self.fill_in_results(scheduler)

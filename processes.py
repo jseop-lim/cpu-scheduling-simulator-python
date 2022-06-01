@@ -1,6 +1,12 @@
 from dataclasses import dataclass, field
 
-
+class BaseProcess:
+    def __init__(self, pid, arrival, burst, priority):
+        self.pid = pid
+        self.arrival = arrival
+        self.burst = burst
+        self.priority = priority
+        
 @dataclass
 class BaseProcess:
     pid: str

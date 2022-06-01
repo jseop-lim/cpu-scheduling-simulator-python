@@ -37,7 +37,17 @@ class Gantt:
                 df.append(d)
                 annots.append(annot_d)
         self.fig = ff.create_gantt(df, index_col = 'Subtask', group_tasks = True)
-        self.fig.update_layout(xaxis_type = 'linear', showlegend = True)
+        self.fig.update_layout(
+            xaxis_type = 'linear', 
+            showlegend = True, 
+            xaxis = dict(
+                showticklabels = True,
+                showgrid = True,
+                gridcolor = 'gray',
+                linecolor = 'gray',
+            )
+        )
+        self.fig.layout.xaxis['tickfont'] = {'size' : 40}
         self.fig['layout']['annotations'] = annots
         
         #self.fig.show()
