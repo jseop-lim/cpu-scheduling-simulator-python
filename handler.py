@@ -1,4 +1,3 @@
-from input import Model
 from schedulers import (
     FirstComeFirstServed, RoundRobin,
     Priority, PriorityPreemptive, PriorityRR,

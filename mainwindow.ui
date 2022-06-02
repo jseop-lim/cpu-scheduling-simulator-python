@@ -40,12 +40,12 @@
       </property>
       <property name="minimumSize">
        <size>
-        <width>520</width>
+        <width>560</width>
         <height>0</height>
        </size>
       </property>
       <property name="currentIndex">
-       <number>2</number>
+       <number>0</number>
       </property>
       <property name="tabBarAutoHide">
        <bool>false</bool>
@@ -60,6 +60,12 @@
         </item>
         <item>
          <widget class="QTableWidget" name="results_fcfs">
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>300</height>
+           </size>
+          </property>
           <column>
            <property name="text">
             <string>pid</string>
@@ -131,6 +137,12 @@
         </item>
         <item>
          <widget class="QTableWidget" name="results_priority">
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>300</height>
+           </size>
+          </property>
           <column>
            <property name="text">
             <string>pid</string>
@@ -195,6 +207,12 @@
         </item>
         <item>
          <widget class="QTableWidget" name="results_pp">
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>300</height>
+           </size>
+          </property>
           <column>
            <property name="text">
             <string>pid</string>
@@ -259,6 +277,12 @@
         </item>
         <item>
          <widget class="QTableWidget" name="results_rr">
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>300</height>
+           </size>
+          </property>
           <column>
            <property name="text">
             <string>pid</string>
@@ -326,7 +350,7 @@
           <property name="maximumSize">
            <size>
             <width>16777215</width>
-            <height>250</height>
+            <height>300</height>
            </size>
           </property>
           <column>
@@ -393,6 +417,12 @@
         </item>
         <item>
          <widget class="QTableWidget" name="results_sjf">
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>300</height>
+           </size>
+          </property>
           <column>
            <property name="text">
             <string>pid</string>
@@ -457,6 +487,12 @@
         </item>
         <item>
          <widget class="QTableWidget" name="results_srtf">
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>300</height>
+           </size>
+          </property>
           <column>
            <property name="text">
             <string>pid</string>

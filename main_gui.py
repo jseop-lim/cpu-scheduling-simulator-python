@@ -54,7 +54,8 @@ class myApp(QMainWindow, form_class):
         scene = QGraphicsScene()
         #pname = 'image_'+tab+'.png'
         pixmap = QPixmap('image_'+tab+'.png')
-        pixmap = pixmap.scaledToWidth(540)
+        width = self.ui.gantt_fcfs.size().width()
+        pixmap = pixmap.scaledToWidth(width)
         
         if tab == 'FCFS':
             view =self.ui.gantt_fcfs
