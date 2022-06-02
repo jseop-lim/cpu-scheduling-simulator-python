@@ -16,15 +16,19 @@ class Handler:
         'FCFS', 'RR', 'Priority', 'PP', 'PRR', 'SJF', 'SRTF'
     ]
 
-    def __init__(self):
-        self.outputs = []
-        self.gantts = []
+    def __init__(self, mode='gui', path=None):
+        self.mode = mode
 
-    #def __init__(self):#, path=None):
-        #if path:
-        #self.model = Model()#.create_from_file(path)
-        #else:
-        #    raise ValueError('파일 경로를 입력하세요.')
+        if self.mode == 'file':
+            if path:
+                from input import Model
+
+                self.model = Model.create_from_file(path)
+            else:
+                raise ValueError('파일 경로를 입력하세요.')
+        elif self.mode == 'gui':
+            self.outputs = []  # run_scheduler()의 반환값
+            self.gantts = []
 
     def run_scheduler(self, scheduler_class):
         """
@@ -55,14 +59,12 @@ class Handler:
         """
         self.outputs = []  # run_scheduler()의 반환값
         self.gantts = []
+
         for i, Scheduler in enumerate(self.scheduler_list):
             print(Scheduler.__name__, i)
             output = self.run_scheduler(Scheduler)
-            self.outputs.append(output)
-            self.gantt = Gantt()
-            self.gantt.create_gantt(self.outputs[i][3], self.schedulers[i])
-
-
-if __name__ == '__main__':
-    handler = Handler(path='input.txt')
-    handler.main()
+            print(output[3], '\n')
+            if self.mode == 'gui':
+                self.outputs.append(output)
+                self.gantt = Gantt()
+                self.gantt.create_gantt(self.outputs[i][3], self.schedulers[i])

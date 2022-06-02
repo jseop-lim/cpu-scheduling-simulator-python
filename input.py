@@ -24,7 +24,7 @@ class Model:
             for _ in range(self.p_num):
                 row = f.readline().split()
                 row[1:] = map(int, row[1:])
-                self.base_process_list.append((row))
+                self.base_process_list.append(BaseProcess(*row))
             # arrival time의 오름차순으로 정렬
             self.base_process_list.sort(key=lambda p: p.arrival)
             self.time_slice = int(f.readline())
