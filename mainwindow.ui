@@ -902,6 +902,39 @@
    </layout>
   </widget>
  </widget>
+ <tabstops>
+  <tabstop>lineEdit_pid</tabstop>
+  <tabstop>lineEdit_arrival</tabstop>
+  <tabstop>lineEdit_burst</tabstop>
+  <tabstop>lineEdit_priority</tabstop>
+  <tabstop>pushButton_add</tabstop>
+  <tabstop>results_priority</tabstop>
+  <tabstop>avg_priority</tabstop>
+  <tabstop>gantt_pp</tabstop>
+  <tabstop>results_pp</tabstop>
+  <tabstop>avg_pp</tabstop>
+  <tabstop>gantt_rr</tabstop>
+  <tabstop>results_rr</tabstop>
+  <tabstop>avg_rr</tabstop>
+  <tabstop>gantt_pprr</tabstop>
+  <tabstop>results_pprr</tabstop>
+  <tabstop>avg_pprr</tabstop>
+  <tabstop>gantt_sjf</tabstop>
+  <tabstop>results_sjf</tabstop>
+  <tabstop>avg_sjf</tabstop>
+  <tabstop>gantt_srtf</tabstop>
+  <tabstop>results_srtf</tabstop>
+  <tabstop>avg_srtf</tabstop>
+  <tabstop>lineEdit_timeslice</tabstop>
+  <tabstop>pushButton_run</tabstop>
+  <tabstop>pushButton_deleteall</tabstop>
+  <tabstop>tableWidget_processes</tabstop>
+  <tabstop>lefthalf</tabstop>
+  <tabstop>gantt_fcfs</tabstop>
+  <tabstop>results_fcfs</tabstop>
+  <tabstop>avg_fcfs</tabstop>
+  <tabstop>gantt_priority</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

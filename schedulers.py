@@ -18,6 +18,7 @@ class Scheduler:
         self.time_slice = model.time_slice if self.is_time_slice else max(p.burst for p in model.base_process_list)
 
         try:
+
             self.running = self.planned_queue.pop(0)
             self.now = self.running.arrival
         except IndexError:
@@ -34,8 +35,8 @@ class Scheduler:
             self.execute_times(time)
 
         if self.running.remain > 0:
-            self.ready_queue.enqueue(self.running)
             self.running.enqueued_at = self.now
+            self.ready_queue.enqueue(self.running)
         else:
             self.terminated_queue.append(self.running)
             self.running.complete = self.now
