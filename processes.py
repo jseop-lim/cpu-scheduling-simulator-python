@@ -50,3 +50,10 @@ class Process(BaseProcess):
 class ShortestFirstProcess(Process):
     def __lt__(self, other):
         return (self.remain, self.enqueued_at) < (other.remain, other.enqueued_at)
+
+
+if __name__ == '__main__':
+    idle_process = Process(BaseProcess(pid='idle', arrival=float('inf'), burst=float('inf'), priority=float('inf')))
+
+    print(idle_process)
+    print(float('inf')-3)

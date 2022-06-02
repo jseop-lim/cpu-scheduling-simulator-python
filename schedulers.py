@@ -1,6 +1,5 @@
-  
 from input import Model
-from processes import Process, ShortestFirstProcess
+from processes import BaseProcess, Process, ShortestFirstProcess
 from queues import Queue, PriorityQueue
 
 
@@ -9,6 +8,7 @@ class Scheduler:
     is_priority = None  # ready queue가 priority queue or FIFO queue
     is_time_slice = None  # time slice 적용?
     process_class = Process
+    idle = Process(BaseProcess(pid='idle', arrival=float('inf'), burst=float('inf'), priority=float('inf')))
 
     def __init__(self, model: Model):
         self.planned_queue = list(map(self.process_class, model.base_process_list))  # 아직 도착하지 않은 프로세스
@@ -18,7 +18,6 @@ class Scheduler:
         self.time_slice = model.time_slice if self.is_time_slice else max(p.burst for p in model.base_process_list)
 
         try:
-
             self.running = self.planned_queue.pop(0)
             self.now = self.running.arrival
         except IndexError:
@@ -63,7 +62,7 @@ class Scheduler:
                     new_process = self.planned_queue.pop(0)
                     self.ready_queue.enqueue(new_process)
                     # preempt by priority
-                    if next_arrival_time == 0 and new_process < self.running:
+                    if self.is_priority and next_arrival_time == 0 and new_process < self.running:
                         self.dispatch()
                         if self.running.first_run == self.now:
                             self.running.first_run = None
@@ -74,7 +73,7 @@ class Scheduler:
             self.dispatch(next_dispatch_time)
 
         print(self.now, self.running)  # TODO temp
-        
+
     @property
     def avg_response(self):
         return sum(process.response for process in self.terminated_queue) / len(self.terminated_queue)
@@ -142,7 +141,7 @@ class ShortestRemainingTimeFirst(ShortestJobFirst):
                     new_process = self.planned_queue.pop(0)
                     self.ready_queue.enqueue(new_process)
                     # concurrent arrive
-                    if next_arrival_time == 0 and new_process.remain < self.running.remain - run_time:
+                    if self.is_priority and next_arrival_time == 0 and new_process.remain < self.running.remain - run_time:
                         if self.running.first_run == self.now:
                             self.running.first_run = None
                         self.dispatch()
