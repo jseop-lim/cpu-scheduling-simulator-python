@@ -63,7 +63,11 @@ class Scheduler:
                     new_process = self.planned_queue.pop(0)
                     self.ready_queue.enqueue(new_process)
                     # preempt by priority
-                    if self.is_preemptive and new_process < self.running:
+                    if next_arrival_time == 0 and new_process < self.running:
+                        self.dispatch()
+                        if self.running.first_run == self.now:
+                            self.running.first_run = None
+                    elif self.is_preemptive and new_process < self.running:
                         self.dispatch(next_arrival_time)
                     continue
 
@@ -137,8 +141,13 @@ class ShortestRemainingTimeFirst(ShortestJobFirst):
                     # arrive
                     new_process = self.planned_queue.pop(0)
                     self.ready_queue.enqueue(new_process)
+                    # concurrent arrive
+                    if next_arrival_time == 0 and new_process.remain < self.running.remain - run_time:
+                        if self.running.first_run == self.now:
+                            self.running.first_run = None
+                        self.dispatch()
                     # preempt by priority
-                    if self.is_preemptive and new_process.remain < self.running.remain - run_time:
+                    elif self.is_preemptive and new_process.remain < self.running.remain - run_time:
                         self.dispatch(next_arrival_time)
                         run_time = 0
                     else:
@@ -146,5 +155,6 @@ class ShortestRemainingTimeFirst(ShortestJobFirst):
                     continue
 
             self.dispatch(next_dispatch_time)
+            run_time = 0
 
         print(self.now, self.running)  # TODO temp; 종료시각 및 None 출력
