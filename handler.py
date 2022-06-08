@@ -45,10 +45,10 @@ class Handler:
         waiting_times = {process.pid: process.wait for process in scheduler.terminated_queue}
         gantt_data = {process.pid: process.log for process in scheduler.terminated_queue}
         
-        avg_times = {'avg_response' : scheduler.avg_response, 'avg_turnaround' : scheduler.avg_turnaround, 'avg_wait':scheduler.avg_wait}
+        avg_times = {'avg_response' : round(scheduler.avg_response,2), 'avg_turnaround' : round(scheduler.avg_turnaround,2), 'avg_wait':round(scheduler.avg_wait,2)}
         print()
         for ps in sorted(scheduler.terminated_queue, key=lambda p: p.pid):
-            print(ps, ps.response, ps.turnaround, ps.wait)
+            print(ps, ps.response, ps.turnaround, ps.wait) 
 
         return response_times, turnaround_times, waiting_times, gantt_data, avg_times
         # TODO 스케줄러 모듈이랑 이 함수랑 연결하기 - 입력? 필드?

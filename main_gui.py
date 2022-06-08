@@ -278,9 +278,9 @@ class myApp(QMainWindow, form_class):
         elif(exp =='Delete All'):
             self.ui.tableWidget_processes.clear()
             self.ui.tableWidget_processes.setRowCount(0)
-            self.ui.gantt_fcfs.items().clear()
-            self.ui.gantt_priority.items().clear()
             self.model.base_process_list.clear()
+            hlabels = ['pid','arrival time', 'burst time', 'priority']
+            self.ui.tableWidget_processes.setHorizontalHeaderLabels(hlabels)
 
         elif(exp =='Run'):
             if(len(self.model.base_process_list)<=0) :
