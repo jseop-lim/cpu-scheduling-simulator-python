@@ -50,7 +50,6 @@ class Scheduler:
             if self.running.first_run is None:
                 self.running.first_run = self.now
 
-            # TODO time slice 지나면 self.now는 증가하지만 실행 프로세스는 그대로
             next_dispatch_time = self.running.remain
             if self.is_time_slice and self.time_slice < self.running.remain:
                 next_dispatch_time = self.time_slice
@@ -105,14 +104,11 @@ class RoundRobin(FirstComeFirstServed):
     is_time_slice = True
 
 
-class PriorityRR(FirstComeFirstServed):
-    is_priority = True
-    is_time_slice = True
-    is_preemptive = False
+class PriorityRR(Priority, RoundRobin):
+    pass
 
 
-class ShortestJobFirst(FirstComeFirstServed):
-    is_priority = True
+class ShortestJobFirst(Priority):
     process_class = ShortestFirstProcess  # 프로세스 객체 안 바꾸면 heap에서 우선순위 비교 시 오류 발생
 
     # def __init__(self, model: Model):
