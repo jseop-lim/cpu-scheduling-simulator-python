@@ -56,10 +56,29 @@
        </attribute>
        <layout class="QVBoxLayout" name="verticalLayout_2">
         <item>
-         <widget class="QGraphicsView" name="gantt_fcfs"/>
+         <widget class="QGraphicsView" name="gantt_fcfs">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>3</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>0</height>
+           </size>
+          </property>
+         </widget>
         </item>
         <item>
          <widget class="QTableWidget" name="results_fcfs">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>2</verstretch>
+           </sizepolicy>
+          </property>
           <property name="maximumSize">
            <size>
             <width>16777215</width>
@@ -90,10 +109,16 @@
         </item>
         <item>
          <widget class="QTableWidget" name="avg_fcfs">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>1</verstretch>
+           </sizepolicy>
+          </property>
           <property name="maximumSize">
            <size>
             <width>16777215</width>
-            <height>70</height>
+            <height>16777215</height>
            </size>
           </property>
           <row>
@@ -127,6 +152,12 @@
        <layout class="QVBoxLayout" name="verticalLayout_3">
         <item>
          <widget class="QGraphicsView" name="gantt_priority">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>3</verstretch>
+           </sizepolicy>
+          </property>
           <property name="maximumSize">
            <size>
             <width>1677725</width>
@@ -137,6 +168,12 @@
         </item>
         <item>
          <widget class="QTableWidget" name="results_priority">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>2</verstretch>
+           </sizepolicy>
+          </property>
           <property name="maximumSize">
            <size>
             <width>16777215</width>
@@ -167,10 +204,16 @@
         </item>
         <item>
          <widget class="QTableWidget" name="avg_priority">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>1</verstretch>
+           </sizepolicy>
+          </property>
           <property name="maximumSize">
            <size>
             <width>16777215</width>
-            <height>70</height>
+            <height>16777215</height>
            </size>
           </property>
           <row>
@@ -203,10 +246,23 @@
        </attribute>
        <layout class="QVBoxLayout" name="verticalLayout_5">
         <item>
-         <widget class="QGraphicsView" name="gantt_pp"/>
+         <widget class="QGraphicsView" name="gantt_pp">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>3</verstretch>
+           </sizepolicy>
+          </property>
+         </widget>
         </item>
         <item>
          <widget class="QTableWidget" name="results_pp">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>2</verstretch>
+           </sizepolicy>
+          </property>
           <property name="maximumSize">
            <size>
             <width>16777215</width>
@@ -237,10 +293,16 @@
         </item>
         <item>
          <widget class="QTableWidget" name="avg_pp">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>1</verstretch>
+           </sizepolicy>
+          </property>
           <property name="maximumSize">
            <size>
             <width>16777215</width>
-            <height>70</height>
+            <height>16777215</height>
            </size>
           </property>
           <row>
@@ -273,10 +335,23 @@
        </attribute>
        <layout class="QVBoxLayout" name="verticalLayout_4">
         <item>
-         <widget class="QGraphicsView" name="gantt_rr"/>
+         <widget class="QGraphicsView" name="gantt_rr">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>3</verstretch>
+           </sizepolicy>
+          </property>
+         </widget>
         </item>
         <item>
          <widget class="QTableWidget" name="results_rr">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>2</verstretch>
+           </sizepolicy>
+          </property>
           <property name="maximumSize">
            <size>
             <width>16777215</width>
@@ -307,10 +382,16 @@
         </item>
         <item>
          <widget class="QTableWidget" name="avg_rr">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>1</verstretch>
+           </sizepolicy>
+          </property>
           <property name="maximumSize">
            <size>
             <width>16777215</width>
-            <height>70</height>
+            <height>16777215</height>
            </size>
           </property>
           <row>
@@ -343,10 +424,23 @@
        </attribute>
        <layout class="QGridLayout" name="gridLayout">
         <item row="0" column="0">
-         <widget class="QGraphicsView" name="gantt_pprr"/>
+         <widget class="QGraphicsView" name="gantt_pprr">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>3</verstretch>
+           </sizepolicy>
+          </property>
+         </widget>
         </item>
         <item row="1" column="0">
          <widget class="QTableWidget" name="results_pprr">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>2</verstretch>
+           </sizepolicy>
+          </property>
           <property name="maximumSize">
            <size>
             <width>16777215</width>
@@ -377,10 +471,16 @@
         </item>
         <item row="2" column="0">
          <widget class="QTableWidget" name="avg_pprr">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>1</verstretch>
+           </sizepolicy>
+          </property>
           <property name="maximumSize">
            <size>
             <width>16777215</width>
-            <height>70</height>
+            <height>16777215</height>
            </size>
           </property>
           <row>
@@ -413,10 +513,23 @@
        </attribute>
        <layout class="QVBoxLayout" name="verticalLayout_8">
         <item>
-         <widget class="QGraphicsView" name="gantt_sjf"/>
+         <widget class="QGraphicsView" name="gantt_sjf">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>3</verstretch>
+           </sizepolicy>
+          </property>
+         </widget>
         </item>
         <item>
          <widget class="QTableWidget" name="results_sjf">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>2</verstretch>
+           </sizepolicy>
+          </property>
           <property name="maximumSize">
            <size>
             <width>16777215</width>
@@ -447,10 +560,16 @@
         </item>
         <item>
          <widget class="QTableWidget" name="avg_sjf">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>1</verstretch>
+           </sizepolicy>
+          </property>
           <property name="maximumSize">
            <size>
             <width>16777215</width>
-            <height>70</height>
+            <height>16777215</height>
            </size>
           </property>
           <row>
@@ -483,10 +602,23 @@
        </attribute>
        <layout class="QVBoxLayout" name="verticalLayout_7">
         <item>
-         <widget class="QGraphicsView" name="gantt_srtf"/>
+         <widget class="QGraphicsView" name="gantt_srtf">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>3</verstretch>
+           </sizepolicy>
+          </property>
+         </widget>
         </item>
         <item>
          <widget class="QTableWidget" name="results_srtf">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>2</verstretch>
+           </sizepolicy>
+          </property>
           <property name="maximumSize">
            <size>
             <width>16777215</width>
@@ -517,10 +649,16 @@
         </item>
         <item>
          <widget class="QTableWidget" name="avg_srtf">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>1</verstretch>
+           </sizepolicy>
+          </property>
           <property name="maximumSize">
            <size>
             <width>16777215</width>
-            <height>70</height>
+            <height>16777215</height>
            </size>
           </property>
           <row>
