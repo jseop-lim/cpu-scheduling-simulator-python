@@ -45,7 +45,7 @@
        </size>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>6</number>
       </property>
       <property name="tabBarAutoHide">
        <bool>false</bool>
@@ -109,6 +109,273 @@
         </item>
         <item>
          <widget class="QTableWidget" name="avg_fcfs">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>1</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>16777215</height>
+           </size>
+          </property>
+          <row>
+           <property name="text">
+            <string>average value</string>
+           </property>
+          </row>
+          <column>
+           <property name="text">
+            <string>response time</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>turnaround time</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>waiting time</string>
+           </property>
+          </column>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tab_sjf">
+       <attribute name="title">
+        <string>SJF</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_8">
+        <item>
+         <widget class="QGraphicsView" name="gantt_sjf">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>3</verstretch>
+           </sizepolicy>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QTableWidget" name="results_sjf">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>2</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>300</height>
+           </size>
+          </property>
+          <column>
+           <property name="text">
+            <string>pid</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>response time</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>turnaround time</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>waiting time</string>
+           </property>
+          </column>
+         </widget>
+        </item>
+        <item>
+         <widget class="QTableWidget" name="avg_sjf">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>1</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>16777215</height>
+           </size>
+          </property>
+          <row>
+           <property name="text">
+            <string>average value</string>
+           </property>
+          </row>
+          <column>
+           <property name="text">
+            <string>response time</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>turnaround time</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>waiting time</string>
+           </property>
+          </column>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tab_srtf">
+       <attribute name="title">
+        <string>SRTF</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_7">
+        <item>
+         <widget class="QGraphicsView" name="gantt_srtf">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>3</verstretch>
+           </sizepolicy>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QTableWidget" name="results_srtf">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>2</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>300</height>
+           </size>
+          </property>
+          <column>
+           <property name="text">
+            <string>pid</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>response time</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>turnaround time</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>waiting time</string>
+           </property>
+          </column>
+         </widget>
+        </item>
+        <item>
+         <widget class="QTableWidget" name="avg_srtf">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>1</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>16777215</height>
+           </size>
+          </property>
+          <row>
+           <property name="text">
+            <string>average value</string>
+           </property>
+          </row>
+          <column>
+           <property name="text">
+            <string>response time</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>turnaround time</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>waiting time</string>
+           </property>
+          </column>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tab_rr">
+       <attribute name="title">
+        <string>RR</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_4">
+        <item>
+         <widget class="QGraphicsView" name="gantt_rr">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>3</verstretch>
+           </sizepolicy>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QTableWidget" name="results_rr">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>2</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>300</height>
+           </size>
+          </property>
+          <column>
+           <property name="text">
+            <string>pid</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>response time</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>turnaround time</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>waiting time</string>
+           </property>
+          </column>
+         </widget>
+        </item>
+        <item>
+         <widget class="QTableWidget" name="avg_rr">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
             <horstretch>0</horstretch>
@@ -329,95 +596,6 @@
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="tab_rr">
-       <attribute name="title">
-        <string>RR</string>
-       </attribute>
-       <layout class="QVBoxLayout" name="verticalLayout_4">
-        <item>
-         <widget class="QGraphicsView" name="gantt_rr">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-            <horstretch>0</horstretch>
-            <verstretch>3</verstretch>
-           </sizepolicy>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QTableWidget" name="results_rr">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-            <horstretch>0</horstretch>
-            <verstretch>2</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>300</height>
-           </size>
-          </property>
-          <column>
-           <property name="text">
-            <string>pid</string>
-           </property>
-          </column>
-          <column>
-           <property name="text">
-            <string>response time</string>
-           </property>
-          </column>
-          <column>
-           <property name="text">
-            <string>turnaround time</string>
-           </property>
-          </column>
-          <column>
-           <property name="text">
-            <string>waiting time</string>
-           </property>
-          </column>
-         </widget>
-        </item>
-        <item>
-         <widget class="QTableWidget" name="avg_rr">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-            <horstretch>0</horstretch>
-            <verstretch>1</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>16777215</height>
-           </size>
-          </property>
-          <row>
-           <property name="text">
-            <string>average value</string>
-           </property>
-          </row>
-          <column>
-           <property name="text">
-            <string>response time</string>
-           </property>
-          </column>
-          <column>
-           <property name="text">
-            <string>turnaround time</string>
-           </property>
-          </column>
-          <column>
-           <property name="text">
-            <string>waiting time</string>
-           </property>
-          </column>
-         </widget>
-        </item>
-       </layout>
-      </widget>
       <widget class="QWidget" name="tab_pprr">
        <attribute name="title">
         <string>PRR</string>
@@ -471,184 +649,6 @@
         </item>
         <item row="2" column="0">
          <widget class="QTableWidget" name="avg_pprr">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-            <horstretch>0</horstretch>
-            <verstretch>1</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>16777215</height>
-           </size>
-          </property>
-          <row>
-           <property name="text">
-            <string>average value</string>
-           </property>
-          </row>
-          <column>
-           <property name="text">
-            <string>response time</string>
-           </property>
-          </column>
-          <column>
-           <property name="text">
-            <string>turnaround time</string>
-           </property>
-          </column>
-          <column>
-           <property name="text">
-            <string>waiting time</string>
-           </property>
-          </column>
-         </widget>
-        </item>
-       </layout>
-      </widget>
-      <widget class="QWidget" name="tab_sjf">
-       <attribute name="title">
-        <string>SJF</string>
-       </attribute>
-       <layout class="QVBoxLayout" name="verticalLayout_8">
-        <item>
-         <widget class="QGraphicsView" name="gantt_sjf">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-            <horstretch>0</horstretch>
-            <verstretch>3</verstretch>
-           </sizepolicy>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QTableWidget" name="results_sjf">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-            <horstretch>0</horstretch>
-            <verstretch>2</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>300</height>
-           </size>
-          </property>
-          <column>
-           <property name="text">
-            <string>pid</string>
-           </property>
-          </column>
-          <column>
-           <property name="text">
-            <string>response time</string>
-           </property>
-          </column>
-          <column>
-           <property name="text">
-            <string>turnaround time</string>
-           </property>
-          </column>
-          <column>
-           <property name="text">
-            <string>waiting time</string>
-           </property>
-          </column>
-         </widget>
-        </item>
-        <item>
-         <widget class="QTableWidget" name="avg_sjf">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-            <horstretch>0</horstretch>
-            <verstretch>1</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>16777215</height>
-           </size>
-          </property>
-          <row>
-           <property name="text">
-            <string>average value</string>
-           </property>
-          </row>
-          <column>
-           <property name="text">
-            <string>response time</string>
-           </property>
-          </column>
-          <column>
-           <property name="text">
-            <string>turnaround time</string>
-           </property>
-          </column>
-          <column>
-           <property name="text">
-            <string>waiting time</string>
-           </property>
-          </column>
-         </widget>
-        </item>
-       </layout>
-      </widget>
-      <widget class="QWidget" name="tab_srtf">
-       <attribute name="title">
-        <string>SRTF</string>
-       </attribute>
-       <layout class="QVBoxLayout" name="verticalLayout_7">
-        <item>
-         <widget class="QGraphicsView" name="gantt_srtf">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-            <horstretch>0</horstretch>
-            <verstretch>3</verstretch>
-           </sizepolicy>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QTableWidget" name="results_srtf">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-            <horstretch>0</horstretch>
-            <verstretch>2</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>300</height>
-           </size>
-          </property>
-          <column>
-           <property name="text">
-            <string>pid</string>
-           </property>
-          </column>
-          <column>
-           <property name="text">
-            <string>response time</string>
-           </property>
-          </column>
-          <column>
-           <property name="text">
-            <string>turnaround time</string>
-           </property>
-          </column>
-          <column>
-           <property name="text">
-            <string>waiting time</string>
-           </property>
-          </column>
-         </widget>
-        </item>
-        <item>
-         <widget class="QTableWidget" name="avg_srtf">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
             <horstretch>0</horstretch>
